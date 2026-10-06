@@ -639,19 +639,56 @@ html.ndt-big-open{ overflow:hidden; }
 @media (max-width:560px){ .tl-man > summary small{ display:none; } }
 </style>
 <!--NDLIB-H:START--><style>.ndlib-crumb{display:flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:1100px;margin:0 auto;padding:12px 16px 0;font:600 13px/1.5 "Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#5B6470;position:relative;z-index:2;word-break:keep-all}.ndlib-crumb a{color:#5B6470;text-decoration:none}.ndlib-crumb a:hover{color:#111;text-decoration:underline}.ndlib-crumb [aria-current]{color:#1A1A1A}.ndlib-crumb a:focus-visible{outline:3px solid #93B4F5;outline-offset:2px;border-radius:4px}@media (max-width:640px){.ndlib-crumb.nd-f2{padding-right:184px}.ndlib-crumb.nd-f1{padding-right:124px}}</style><!--NDLIB-H:END-->
-<style>.tl-layout{display:block!important;grid-template-columns:1fr!important}.tl-main{max-width:1100px;margin:0 auto}</style><style>.lb-hd{max-width:1100px;margin-left:auto;margin-right:auto}</style></head>
+<style>.tl-layout{display:block!important;grid-template-columns:1fr!important}.tl-main{max-width:1100px;margin:0 auto}</style><style>.lb-hd{max-width:1100px;margin-left:auto;margin-right:auto}</style><style>
+.dk-top{max-width:1100px;margin:0 auto 28px;padding:0 4px;display:grid;gap:14px}
+.dk-search{width:100%;padding:14px 16px;border:1px solid #d9dce3;border-radius:14px;font:inherit;font-size:16px;background:#fff}
+.dk-links{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dk-lab{font-size:13px;color:#667;margin-right:4px}
+.dk-links a{padding:8px 14px;border-radius:999px;background:#fff0f3;color:#c2294d;text-decoration:none;font-weight:600;font-size:14px;border:1px solid #ffd3dc}
+.dk-calc{background:#f4f5f8;border-radius:18px;padding:16px 18px}
+.dk-calc summary{cursor:pointer;font-weight:700;font-size:17px}
+.dk-calc summary small{font-weight:400;color:#667;margin-left:8px;font-size:13px}
+.dk-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px}
+.dk-row label{display:grid;min-width:0;align-content:start;gap:6px;font-size:13px;color:#445}
+.dk-row label small{color:#889;font-size:11px}
+.dk-row input{width:100%;box-sizing:border-box;min-width:0;padding:11px 12px;border:1px solid #d9dce3;border-radius:10px;font:inherit;font-size:16px;text-align:right;background:#fff}
+.dk-out{margin-top:14px;padding:14px;border-radius:12px;background:#fff;line-height:1.7}
+.dk-out b{font-size:22px;color:#c2294d}
+.dk-out.err{color:#b00}
+.kd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.kd-chip{display:grid;gap:4px;padding:14px 16px;border-radius:14px;background:#f4f5f8;text-decoration:none;color:#111;border:1px solid transparent}
+.kd-chip:hover{border-color:#ff6b8b;background:#fff}
+.kd-chip b{font-size:15px}.kd-chip span{font-size:12.5px;color:#667}
+.kd-sec{margin-top:32px}
+.dk-hide{display:none!important}
+</style><link rel="manifest" href="https://imssam2026-star.github.io/dalkeumhao-workspace/manifest.webmanifest"><link rel="apple-touch-icon" href="https://imssam2026-star.github.io/dalkeumhao-workspace/icon-192.png"><meta name="theme-color" content="#ff6b8b"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="달큼하오"></head>
 <body class="lb-page">
 <!--NDLIB-B:START--><!--NDLIB-B:END-->
 <div class="lb-wrap">
   <header class="lb-hd">
     <p class="lb-kick">달큼하오 · 내 작업공간</p>
     <h1 class="lb-ttl">달큼하오 작업공간</h1>
-    <p class="lb-sub">스마트스토어·쇼핑몰 운영에 맞춰 고른 업무 도구 15개. 하나를 눌러 바로 쓰세요. 로그인 없이 무료, 입력 내용은 내 브라우저에만 저장돼요.</p>
+    <p class="lb-sub">스마트스토어·쇼핑몰 운영에 맞춰 고른 업무 도구 15개와 셀러용 도구 모음. 하나를 눌러 바로 쓰세요. 로그인 없이 무료, 입력 내용은 내 브라우저에만 저장돼요.</p>
   </header>
 
   
 
-  <div class="tl-layout">
+  
+<div class="dk-top">
+ <input id="dkSearch" class="dk-search" type="search" placeholder="도구 찾기 (예: 마진, 수수료, 배경, 라벨)" aria-label="도구 찾기">
+ <div class="dk-links"><span class="dk-lab">바로가기</span><a href="https://sell.smartstore.naver.com/" target="_blank" rel="noopener">스마트스토어센터</a><a href="https://wing.coupang.com/" target="_blank" rel="noopener">쿠팡 Wing</a><a href="https://www.shoplinker.co.kr/" target="_blank" rel="noopener">샵링커</a><a href="https://qsm.qoo10.jp/GMKT.INC.GSM.Web/Login.aspx" target="_blank" rel="noopener">Qoo10 QSM</a><a href="https://hometax.go.kr/" target="_blank" rel="noopener">홈택스(부가세)</a><a href="https://blog.naver.com/startcompass" target="_blank" rel="noopener">네이버 블로그</a></div>
+ <details class="dk-calc" open>
+  <summary>판매가 역산 계산기 <small>원가와 목표 마진을 넣으면 팔아야 할 가격이 나와요</small></summary>
+  <div class="dk-row">
+   <label>원가(매입가)<input id="dkCost" inputmode="numeric" placeholder="4200"></label>
+   <label>배송비(내 부담)<input id="dkShip" inputmode="numeric" placeholder="0"></label>
+   <label>기타 비용(포장 등)<input id="dkEtc" inputmode="numeric" placeholder="0"></label>
+   <label>총 수수료율 %<input id="dkFee" inputmode="decimal" placeholder="마켓+결제 합계"></label>
+   <label>목표 마진율 %<input id="dkMargin" inputmode="decimal" placeholder="20"></label>
+  </div>
+  <div class="dk-out" id="dkOut">값을 넣으면 결과가 여기에 나와요. 수수료율은 판매처 계산기로 확인한 값을 넣어 주세요.</div>
+ </details>
+</div><div class="tl-layout">
   
 
   <div class="tl-main"><section class="tl-sec" id="g0"><h2 class="tl-sh">가격·세금 계산 <small>상품 가격, 마진, 부가세를 정리할 때 · 3개</small></h2><div class="tl-tiles"><article class="tl-tile" id="margin-calculator" data-tool="margin-calculator" data-scene="calc" data-who="sales acct shop" data-shape="calc" data-text="단가·마진 계산기 원가와 판매가를 넣으면 개당 이익·마진율·원가 대비 이익률이 바로 나와요. 반대로 목표 마진율을 넣으면 팔아야 할 값을 끝자리까지 올려 알려 주고, 카드·배달앱 수수료와 배송비도 빼서 계산해요. 마진 계산기 마진율 이익률 마크업 원가 판매가 단가 정하기 가격 책정 소비자가 도매가 납품가 공급가 부가세 포함 부가세 별도 VAT 1.1 카드 수수료 배달앱 수수료 오픈마켓 수수료 배송비 포장비 개당 이익 손익 손해 역마진 목표 마진 끝자리 올림 100원 단위 1000원 단위 8만9천 품목 비교 메뉴 가격 쇼핑몰 스마트스토어 손익분기 고정비 임대료 판매량 레시피 원가 재료비 쿠폰 할인 단가 인하 마지노선 최저가 사장님 가게 카페 식당 영업 회계 경리 계산·견적 계산기 영업 회계 사장님(가게)">
@@ -804,7 +841,7 @@ html.ndt-big-open{ overflow:hidden; }
             <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
           </div>
         </a>
-      </article></div></section></div>
+      </article></div></section><section class="tl-sec kd-sec" id="k0"><h2 class="tl-sh">마켓 수수료·마진 계산 <small>판매 전 수수료와 남는 돈을 확인할 때 · 7개</small></h2><div class="kd-grid"><a class="kd-chip" href="https://tools.kdpmkt.com/smartstore-fees/" target="_blank" rel="noopener" data-text="스마트스토어 수수료 사업자별 수수료와 이익"><b>스마트스토어 수수료</b><span>사업자별 수수료와 이익</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/coupang-fees/" target="_blank" rel="noopener" data-text="쿠팡 수수료 카테고리 요율·이익률"><b>쿠팡 수수료</b><span>카테고리 요율·이익률</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/rocket-growth-margin/" target="_blank" rel="noopener" data-text="쿠팡 로켓그로스 마진율 상품 1개 마진 (VAT 포함)"><b>쿠팡 로켓그로스 마진율</b><span>상품 1개 마진 (VAT 포함)</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/rocket-growth-policy/" target="_blank" rel="noopener" data-text="쿠팡 로켓그로스 정책 공식 비용·세이버 혜택"><b>쿠팡 로켓그로스 정책</b><span>공식 비용·세이버 혜택</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/gmarket-fees/" target="_blank" rel="noopener" data-text="지마켓 수수료 주문·월 이익 계산"><b>지마켓 수수료</b><span>주문·월 이익 계산</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/auction-fees/" target="_blank" rel="noopener" data-text="옥션 수수료 주문·월 이익 계산"><b>옥션 수수료</b><span>주문·월 이익 계산</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/11st-fees/" target="_blank" rel="noopener" data-text="11번가 수수료 쿠폰·제휴료 구분 계산"><b>11번가 수수료</b><span>쿠폰·제휴료 구분 계산</span></a></div></section><section class="tl-sec kd-sec" id="k1"><h2 class="tl-sh">상품 이미지 작업 <small>상세페이지·썸네일을 만들 때 · 6개</small></h2><div class="kd-grid"><a class="kd-chip" href="https://tools.kdpmkt.com/image/" target="_blank" rel="noopener" data-text="이미지 편집 크기·워터마크 한 번에"><b>이미지 편집</b><span>크기·워터마크 한 번에</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/background/" target="_blank" rel="noopener" data-text="배경 제거·바꾸기 피사체만 남기고 배경 교체"><b>배경 제거·바꾸기</b><span>피사체만 남기고 배경 교체</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/split/" target="_blank" rel="noopener" data-text="사진 분할 2·4·8·16분할"><b>사진 분할</b><span>2·4·8·16분할</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/template/" target="_blank" rel="noopener" data-text="템플릿 캔버스 이미지·영상으로 내보내기"><b>템플릿 캔버스</b><span>이미지·영상으로 내보내기</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/mosaic/" target="_blank" rel="noopener" data-text="사진 모자이크 가리고 싶은 부분만"><b>사진 모자이크</b><span>가리고 싶은 부분만</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/gif/" target="_blank" rel="noopener" data-text="영상 → GIF 움직이는 이미지 만들기"><b>영상 → GIF</b><span>움직이는 이미지 만들기</span></a></div></section><section class="tl-sec kd-sec" id="k2"><h2 class="tl-sh">운영 보조 <small>발송·정리·기록할 때 · 6개</small></h2><div class="kd-grid"><a class="kd-chip" href="https://tools.kdpmkt.com/labelmate/" target="_blank" rel="noopener" data-text="A4 라벨메이트 엑셀 붙여넣기, 23종 라벨 출력"><b>A4 라벨메이트</b><span>엑셀 붙여넣기, 23종 라벨 출력</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/capture/" target="_blank" rel="noopener" data-text="웹페이지 전체 캡처 경쟁 상품 페이지 저장"><b>웹페이지 전체 캡처</b><span>경쟁 상품 페이지 저장</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/rename/" target="_blank" rel="noopener" data-text="파일명 일괄 변경 이미지 이름·번호 정리"><b>파일명 일괄 변경</b><span>이미지 이름·번호 정리</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/qr/" target="_blank" rel="noopener" data-text="QR 코드 생성 스토어 주소를 QR로"><b>QR 코드 생성</b><span>스토어 주소를 QR로</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/pdf-tools/" target="_blank" rel="noopener" data-text="PDF 변환·관리 병합·분할·변환"><b>PDF 변환·관리</b><span>병합·분할·변환</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/blog/" target="_blank" rel="noopener" data-text="블로그 본문 정리 줄바꿈·해시태그 정리"><b>블로그 본문 정리</b><span>줄바꿈·해시태그 정리</span></a></div></section></div>
 
   
   </div>
@@ -945,4 +982,34 @@ html.ndt-big-open{ overflow:hidden; }
 <!--NDSTORY:END-->
 
 
-</body></html>
+<script>
+(function(){
+ var $=function(i){return document.getElementById(i)};
+ var ids=['dkCost','dkShip','dkEtc','dkFee','dkMargin'];
+ var num=function(v){return parseFloat(String(v).replace(/[^0-9.]/g,''))||0};
+ function calc(){
+  var c=num($('dkCost').value),s=num($('dkShip').value),e=num($('dkEtc').value),f=num($('dkFee').value)/100,m=num($('dkMargin').value)/100,o=$('dkOut');
+  try{localStorage.setItem('dk_calc',JSON.stringify(ids.map(function(i){return $(i).value})))}catch(x){}
+  if(!c){o.className='dk-out';o.textContent='값을 넣으면 결과가 여기에 나와요. 수수료율은 판매처 계산기로 확인한 값을 넣어 주세요.';return}
+  var cost=c+s+e,d=1-f-m;
+  if(d<=0){o.className='dk-out err';o.textContent='수수료율과 목표 마진율의 합이 100% 이상이에요. 값을 낮춰 주세요.';return}
+  var p=Math.ceil(cost/d/10)*10, fee=Math.round(p*f), profit=p-fee-cost;
+  var fmt=function(n){return n.toLocaleString('ko-KR')+'원'};
+  o.className='dk-out';
+  o.innerHTML='권장 판매가 <b>'+fmt(p)+'</b> (10원 단위 올림)<br>수수료 '+fmt(fee)+' · 총 비용 '+fmt(cost)+' · 예상 이익 <b>'+fmt(profit)+'</b> (판매가 대비 '+(p?(profit/p*100).toFixed(1):0)+'%)<br><small>부가세·반품·광고비는 포함되지 않아요.</small>';
+ }
+ try{var sv=JSON.parse(localStorage.getItem('dk_calc')||'null');if(sv)ids.forEach(function(i,k){$(i).value=sv[k]||''})}catch(x){}
+ ids.forEach(function(i){$(i).addEventListener('input',calc)});calc();
+ $('dkSearch').addEventListener('input',function(){
+  var q=this.value.trim().toLowerCase();
+  document.querySelectorAll('.tl-tile,.kd-chip').forEach(function(el){
+   var t=((el.getAttribute('data-text')||'')+' '+el.textContent).toLowerCase();
+   el.classList.toggle('dk-hide',!!q&&t.indexOf(q)<0);
+  });
+  document.querySelectorAll('.tl-sec').forEach(function(s){
+   var any=s.querySelector('.tl-tile:not(.dk-hide),.kd-chip:not(.dk-hide)');
+   s.classList.toggle('dk-hide',!!q&&!any);
+  });
+ });
+})();
+</script></body></html>
