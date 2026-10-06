@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="ko"><head><base href="https://nondev-thinking.web.app/tools/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🛠️%3C/text%3E%3C/svg%3E">
+<title>달큼하오 작업공간</title>
+
+
+<meta name="robots" content="index,follow">
+
+
+
+
+
+
+
+
+<style>/* ===== 비개발자 코딩 시연 교실 — 공통 포털 스타일 (light-note) ===== */
+/* Pretendard 가변 폰트 self-host (레드블루 2026-06-20: jsdelivr 의존·SRI 부재·프라이버시 누출 제거) */
+@font-face{ font-family:'Pretendard'; font-weight:45 920; font-style:normal; font-display:swap; src:url('/fonts/PretendardVariable.woff2') format('woff2'); }
+
+:root{
+  --bg:#F7F5F0; --fg:#1A1A1A; --accent:#2563EB; --accent2:#5EEAD4;
+  --muted:#5B6470; --muted-strong:#4B5563; --line:#E2DED5; --card:#FFFFFF;
+  --good:#16A34A; --bad:#DC2626; --lock:#9AA1AC; --lock-bg:#EFEDE7;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+  --maxw:1100px;
+  --font:'Pretendard','Pretendard Variable',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+}
+*{ box-sizing:border-box; }
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:var(--font); font-weight:500; line-height:1.6;
+  word-break:keep-all; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+a{ color:inherit; text-decoration:none; }
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:34px 22px 90px; }
+
+/* ===== 헤더 ===== */
+.top{ text-align:center; margin-bottom:30px; }
+.top .crumb{ display:inline-flex; align-items:center; gap:6px; color:var(--muted); font-weight:700;
+  font-size:14px; margin-bottom:14px; }
+.top .crumb a{ color:var(--accent); }
+.top .crumb a:hover{ text-decoration:underline; }
+.top .kicker{ color:var(--accent); font-weight:800; letter-spacing:.04em; font-size:14px; }
+.top h1{ color:var(--fg); font-size:clamp(26px,3.6vw,42px); font-weight:900; margin:8px 0 6px; line-height:1.18; }
+.top p.sub{ color:var(--muted-strong); font-size:clamp(15px,1.9vw,19px); margin:0 auto; max-width:680px; }
+.attrib{ display:inline-block; margin-top:14px; padding:5px 13px; border-radius:999px;
+  background:#fff; border:1px solid var(--line); color:var(--muted); font-size:12.5px; font-weight:700; }
+
+/* ===== 상단 CTA 바 (홈) ===== */
+.ctabar{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:0 0 26px; }
+.cta-btn{ display:inline-flex; align-items:center; gap:8px; font-family:inherit; font-weight:800;
+  font-size:15px; line-height:1; padding:13px 22px; border-radius:999px; text-decoration:none;
+  border:1.5px solid transparent; box-shadow:var(--shadow);
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease; }
+.cta-btn:hover{ transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.15); }
+.cta-btn .ico{ font-size:17px; line-height:1; }
+.cta-btn.site{ background:var(--accent); color:#fff; }
+.cta-btn.site:hover{ background:#1d4fd0; }
+.cta-btn.yt{ background:#D70000; color:#fff; }
+.cta-btn.yt:hover{ background:#b80000; }
+
+/* ===== 용어사전 진입 배너 (헤더 아래) ===== */
+.dict-banner{ display:flex; align-items:center; gap:18px; margin:0 0 24px;
+  background:linear-gradient(100deg,#FEF6E7 0%,#FBE9CC 100%);
+  border:1.5px solid #F1DCB0; border-radius:20px; padding:18px 22px; text-decoration:none; color:inherit;
+  box-shadow:0 1px 3px rgba(146,64,14,.05);
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+.dict-banner:hover{ transform:translateY(-2px); border-color:#D9A441;
+  box-shadow:0 2px 6px rgba(146,64,14,.08), 0 16px 34px rgba(146,64,14,.13); }
+.dict-banner .db-ic{ flex:0 0 auto; width:56px; height:56px; border-radius:16px;
+  display:grid; place-items:center; font-size:30px; background:#fff; border:1px solid #F1DCB0; }
+.dict-banner .db-body{ flex:1; min-width:0; }
+.dict-banner .db-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+.dict-banner .db-title{ font-size:clamp(17px,2.1vw,20px); font-weight:900; color:#7C4A12; line-height:1.2; }
+.dict-banner .db-new{ font-size:11px; font-weight:800; color:#fff; background:#C2410C; border-radius:999px; padding:2px 9px; letter-spacing:.04em; }
+.dict-banner .db-desc{ font-size:14.5px; color:#92400E; margin:5px 0 0; line-height:1.5; }
+.dict-banner .db-desc b{ font-weight:800; color:#7C4A12; }
+.dict-banner .db-cta{ flex:0 0 auto; display:inline-flex; align-items:center; gap:6px;
+  font-weight:800; font-size:15px; color:#fff; background:#B45309; border-radius:999px; padding:13px 21px; white-space:nowrap;
+  transition:background .15s ease; }
+.dict-banner:hover .db-cta{ background:#92400E; }
+
+/* ===== 기본서 배너 (.book) — 사전은 앰버, 기본서는 초록으로 역할 구분 ===== */
+.dict-banner.book{ background:linear-gradient(100deg,#EAF7F1 0%,#D6EEE2 100%);
+  border-color:#A8DCC4; box-shadow:0 1px 3px rgba(15,122,79,.05); margin-bottom:14px; }
+.dict-banner.book:hover{ border-color:#4CAE86;
+  box-shadow:0 2px 6px rgba(15,122,79,.08), 0 16px 34px rgba(15,122,79,.13); }
+.dict-banner.book .db-ic{ border-color:#A8DCC4; }
+.dict-banner.book .db-title{ color:#0B5B3B; }
+.dict-banner.book .db-new{ background:#0f7a4f; }
+.dict-banner.book .db-desc{ color:#15694A; }
+.dict-banner.book .db-desc b{ color:#0B5B3B; }
+.dict-banner.book .db-cta{ background:#0f7a4f; }
+.dict-banner.book:hover .db-cta{ background:#0B5B3B; }
+
+/* ===== Jev 가이드 배너 (.jev) — 판단·확률을 떠올리는 인디고 ===== */
+.dict-banner.jev{ background:linear-gradient(100deg,#F3F0FF 0%,#E8E3FF 100%);
+  border-color:#C9BDF4; box-shadow:0 1px 3px rgba(67,42,122,.06); }
+.dict-banner.jev:hover{ border-color:#8F78D4;
+  box-shadow:0 2px 6px rgba(67,42,122,.09), 0 16px 34px rgba(67,42,122,.14); }
+.dict-banner.jev .db-ic{ border-color:#C9BDF4; }
+.dict-banner.jev .db-title{ color:#432A7A; }
+.dict-banner.jev .db-new{ background:#6546B8; font-size:12px; }
+.dict-banner.jev .db-desc{ color:#5B428A; }
+.dict-banner.jev .db-desc b{ color:#432A7A; }
+.dict-banner.jev .db-cta{ background:#5B3BB5; }
+.dict-banner.jev:hover .db-cta{ background:#432A7A; }
+
+/* ===== 모션 주문 사전 배너 (.motion) — 영상·방송을 떠올리는 로즈 ===== */
+.dict-banner.motion{ background:linear-gradient(100deg,#FFF0F2 0%,#FFE1E7 100%);
+  border-color:#F7C5CF; box-shadow:0 1px 3px rgba(138,28,51,.06); }
+.dict-banner.motion:hover{ border-color:#E27A90;
+  box-shadow:0 2px 6px rgba(138,28,51,.09), 0 16px 34px rgba(138,28,51,.14); }
+.dict-banner.motion .db-ic{ border-color:#F7C5CF; }
+.dict-banner.motion .db-title{ color:#8A1C33; }
+.dict-banner.motion .db-new{ background:#C2294A; }
+.dict-banner.motion .db-desc{ color:#8F2940; }
+.dict-banner.motion .db-desc b{ color:#8A1C33; }
+.dict-banner.motion .db-cta{ background:#C2294A; }
+.dict-banner.motion:hover .db-cta{ background:#8A1C33; }
+
+/* 코덱스 정석(자매편) — 클로드 정석(초록) 옆 짝, 파랑 계열 (2026-10-01) */
+.dict-banner.codex{ background:linear-gradient(100deg,#EAF3FB 0%,#D9E9F7 100%);
+  border-color:#B6D3EE; box-shadow:0 1px 3px rgba(31,111,178,.05); }
+.dict-banner.codex:hover{ border-color:#5B9BD5;
+  box-shadow:0 2px 6px rgba(31,111,178,.08), 0 16px 34px rgba(31,111,178,.13); }
+.dict-banner.codex .db-ic{ border-color:#B6D3EE; }
+.dict-banner.codex .db-title{ color:#123F6B; }
+.dict-banner.codex .db-new{ background:#1F6FB2; }
+.dict-banner.codex .db-desc{ color:#24527F; }
+.dict-banner.codex .db-desc b{ color:#123F6B; }
+.dict-banner.codex .db-cta{ background:#1F6FB2; }
+.dict-banner.codex:hover .db-cta{ background:#123F6B; }
+
+/* ===== 홈 섹션 제목 + 「바로 쓰는 자료」 2열 격자 (2026-09-25 홈 정리) =====
+   자료가 늘어도 첫 화면이 배너로 덮이지 않게: 가로 배너 → 2열 카드. 휴대폰은 1열. */
+.hub-sec{ display:flex; align-items:baseline; gap:4px 10px; flex-wrap:wrap; font-size:clamp(19px,2.3vw,23px);
+  font-weight:900; margin:0 0 14px; color:var(--fg); line-height:1.3; }
+.hub-sec small{ font-size:13.5px; font-weight:700; color:var(--muted); }
+.res{ margin:0 0 34px; }
+.res-grid{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; }
+.res-grid > .dict-banner:last-child:nth-child(odd){ grid-column:1 / -1; }
+.res-grid .dict-banner{ display:grid; grid-template-columns:48px minmax(0,1fr); grid-template-rows:1fr auto;
+  grid-template-areas:"ic body" "ic cta"; column-gap:14px; row-gap:12px; align-items:start;
+  margin:0; padding:18px; height:100%; }
+.res-grid .dict-banner .db-ic{ grid-area:ic; width:48px; height:48px; font-size:26px; border-radius:14px; }
+.res-grid .dict-banner .db-body{ grid-area:body; }
+.res-grid .dict-banner .db-title{ font-size:clamp(16.5px,1.9vw,18.5px); line-height:1.3; }
+.res-grid .dict-banner .db-desc{ font-size:14px; margin-top:6px; }
+.res-grid .dict-banner .db-cta{ grid-area:cta; justify-self:start; align-self:end; padding:10px 17px; font-size:14px; }
+@media (max-width:720px){
+  .res-grid{ grid-template-columns:1fr; }
+}
+/* 휴대폰: 자료 카드를 납작하게(설명 2줄·버튼 대신 제목 옆 →) — 카드 4장이 강의 시즌을 한참 밀어내지 않게. 카드 전체가 링크라 누르면 열림 */
+@media (max-width:560px){
+  .res-grid{ gap:10px; }
+  .res-grid .dict-banner{ grid-template-areas:"ic body"; grid-template-rows:auto; column-gap:12px; padding:13px 14px; }
+  .res-grid .dict-banner .db-ic{ width:42px; height:42px; font-size:22px; border-radius:12px; }
+  .res-grid .dict-banner .db-cta{ display:none; }
+  .res-grid .dict-banner .db-title::after{ content:" →"; }
+  .res-grid .dict-banner .db-desc{ font-size:13.5px; margin-top:4px; display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+}
+
+/* ===== 카드 그리드 ===== */
+.grid{ display:grid; gap:18px; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); }
+
+/* 공통 카드 */
+.card{
+  position:relative; background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:22px 22px 20px; box-shadow:var(--shadow); transition:transform .16s ease, box-shadow .16s ease;
+  display:flex; flex-direction:column; min-height:178px;
+}
+.card.clickable{ cursor:pointer; }
+.card.clickable:hover{ transform:translateY(-3px); box-shadow:0 2px 6px rgba(0,0,0,.06), 0 16px 36px rgba(0,0,0,.10); border-color:#cfd8ea; z-index:3; }
+.card .no{ font-size:13px; font-weight:800; color:var(--accent); letter-spacing:.03em; }
+.card h3{ font-size:clamp(18px,2.1vw,22px); font-weight:900; margin:7px 0 4px; color:var(--fg); line-height:1.25; }
+.card .meta{ font-size:14.5px; color:var(--muted-strong); margin:0 0 14px; }
+.card .spacer{ flex:1; }
+.card .row{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+
+/* 배지 */
+.badge{ display:inline-flex; align-items:center; gap:5px; font-size:12.5px; font-weight:800;
+  padding:4px 10px; border-radius:999px; }
+.badge.open{ background:#E7F1FF; color:var(--accent); }
+.badge.go{ background:#E7F6EF; color:#166534; }
+.badge.soon{ background:var(--lock-bg); color:#5B6168; }
+.badge.priv{ background:#EDE9FE; color:#7C3AED; }
+
+/* 버튼 */
+.btn{ position:relative; display:inline-flex; align-items:center; gap:5px; font-family:inherit; font-weight:800;
+  font-size:14px; padding:8px 11px; border-radius:11px; border:1px solid transparent; cursor:pointer; white-space:nowrap;
+  transition:background .15s ease, border-color .15s ease, color .15s ease; }
+.btn.primary{ background:var(--accent); color:#fff; }
+.btn.primary:hover{ background:#1d4fd0; }
+.btn.ghost{ background:#fff; color:var(--fg); border-color:var(--line); }
+.btn.ghost:hover{ border-color:var(--accent); color:var(--accent); }
+.btn.yt{ background:#fff; color:#cc2222; border-color:#f0d4d4; }
+.btn.yt:hover{ border-color:#cc2222; }
+.btn.dict{ background:#FEF6E7; color:#92400E; border-color:#F1DCB0; }
+.btn.dict:hover{ border-color:#D9A441; color:#7C4A12; }
+
+/* 버튼 말풍선 툴팁 (마우스 올리면 버튼 설명) */
+.btn[data-tip]::after{
+  content:attr(data-tip);
+  position:absolute; left:50%; bottom:calc(100% + 10px); transform:translateX(-50%) translateY(4px);
+  background:#0F172A; color:#fff; font-size:12.5px; font-weight:700; line-height:1.45;
+  padding:8px 11px; border-radius:10px; width:max-content; max-width:188px; white-space:normal; text-align:center;
+  box-shadow:0 8px 22px rgba(15,23,42,.30);
+  opacity:0; visibility:hidden; pointer-events:none; transition:opacity .16s ease, transform .16s ease; z-index:60; }
+.btn[data-tip]::before{
+  content:""; position:absolute; left:50%; bottom:calc(100% + 4px); transform:translateX(-50%) translateY(4px);
+  border:6px solid transparent; border-top-color:#0F172A;
+  opacity:0; visibility:hidden; pointer-events:none; transition:opacity .16s ease, transform .16s ease; z-index:60; }
+.btn[data-tip]:hover::after, .btn[data-tip]:hover::before{ opacity:1; visibility:visible; transform:translateX(-50%) translateY(0); }
+
+/* 잠금 카드 */
+.card.locked{ background:var(--lock-bg); border-style:dashed; border-color:#d9d4c8; box-shadow:none; }
+.card.locked h3{ color:#4B5563; }
+.card.locked .no{ color:#4B5563; }
+.card.locked .lockmsg{ display:flex; align-items:center; gap:7px; color:#4B5563;
+  font-size:13.5px; font-weight:700; margin-top:auto; }
+.card .lockicon{ position:absolute; top:18px; right:20px; font-size:20px; opacity:.55; }
+
+/* coming 시리즈 카드 */
+.card.coming{ background:var(--lock-bg); border-style:dashed; border-color:#d9d4c8; box-shadow:none; }
+.card.coming h3{ color:#4B5563; }
+.card.coming .no{ color:#1E40AF; }
+
+/* 시리즈 카드 큰 이모지 */
+.card .emoji{ font-size:30px; line-height:1; margin-bottom:4px; }
+
+/* 푸터 */
+.foot{ text-align:center; color:var(--muted-strong); font-size:13px; margin-top:46px; }
+.foot a{ color:var(--accent); text-decoration:underline; text-underline-offset:2px; }
+
+/* ===== 비공개 시즌 비밀번호 게이트 ===== */
+.gate{ max-width:420px; margin:34px auto 0; background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:34px 28px; text-align:center; box-shadow:var(--shadow); }
+.gate-ic{ font-size:42px; line-height:1; }
+.gate-msg{ color:var(--muted); font-size:15px; margin:10px 0 0; }
+.gate-input{ width:100%; box-sizing:border-box; margin:20px 0 12px; padding:13px 16px; font-family:inherit; font-size:16px;
+  color:var(--fg); background:#fff; border:1px solid var(--line); border-radius:12px; }
+.gate-input:focus{ outline:none; border-color:var(--accent); }
+.gate-btn{ width:100%; padding:13px; font-family:inherit; font-weight:800; font-size:16px; color:#fff;
+  background:var(--accent); border:none; border-radius:12px; cursor:pointer; }
+.gate-btn:hover{ background:#1d4fd0; }
+.gate-err{ color:var(--bad); font-size:14px; font-weight:700; margin-top:10px; min-height:18px; }
+
+/* ===== 쇼케이스 (시즌 아래 별도 섹션 · 현장 라이브 데모) ===== */
+.showcase{ margin-top:52px; }
+.sc-divider{ display:flex; align-items:center; gap:14px; margin:0 0 18px; }
+.sc-divider::before, .sc-divider::after{ content:""; flex:1; height:1px; background:var(--line); }
+.sc-kicker{ color:var(--muted-strong); font-weight:800; font-size:12px; letter-spacing:.16em; }
+.sc-title{ text-align:center; font-size:clamp(21px,2.7vw,30px); font-weight:900; margin:0 0 5px; }
+.sc-sub{ text-align:center; color:var(--muted-strong); font-size:15px; margin:0 0 22px; }
+.sc-grid{ display:grid; gap:16px; grid-template-columns:1fr; max-width:780px; margin:0 auto; }
+.sc-card{ display:flex; align-items:center; gap:20px; padding:24px 26px; border-radius:22px; text-decoration:none;
+  background:linear-gradient(135deg,#0F172A 0%, #1E293B 100%); color:#fff; border:1px solid #26344E;
+  box-shadow:0 14px 40px rgba(15,23,42,.22); transition:transform .16s ease, box-shadow .16s ease; }
+.sc-card:hover{ transform:translateY(-3px); box-shadow:0 22px 54px rgba(15,23,42,.32); }
+.sc-emoji{ width:64px; height:64px; border-radius:18px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  font-size:32px; background:rgba(94,234,212,.12); border:1px solid rgba(94,234,212,.28); }
+.sc-meta{ flex:1; min-width:0; }
+.sc-badge{ display:inline-block; background:rgba(94,234,212,.16); color:#5EEAD4; font-weight:800; font-size:12px;
+  padding:4px 11px; border-radius:999px; margin-bottom:8px; }
+.sc-meta h3{ color:#fff; font-size:clamp(19px,2.2vw,23px); font-weight:900; margin:0 0 4px; line-height:1.25; }
+.sc-meta p{ color:#C3CAD6; font-size:14.5px; margin:0; }
+.sc-cta{ flex-shrink:0; background:#fff; color:#0F172A; font-weight:800; font-size:14px; padding:11px 18px;
+  border-radius:999px; white-space:nowrap; }
+
+/* 잠긴 쇼케이스 카드 (영상 공개 전 예고) */
+.sc-card.locked{ background:linear-gradient(135deg,#262B36 0%, #333A48 100%); border-color:#3B4250;
+  box-shadow:0 8px 24px rgba(15,23,42,.14); cursor:default; }
+.sc-card.locked:hover{ transform:none; box-shadow:0 8px 24px rgba(15,23,42,.14); }
+.sc-card.locked .sc-emoji{ background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.12); filter:grayscale(.35); opacity:.85; }
+.sc-card.locked .sc-meta h3{ color:#E5E9F0; }
+.sc-card.locked .sc-meta p{ color:#9AA3B2; }
+.sc-badge.lock{ background:rgba(255,255,255,.10); color:#C3CAD6; }
+.sc-cta.lock{ background:transparent; color:#C3CAD6; border:1px dashed #5A6373; font-weight:700; }
+
+@media (max-width:560px){
+  .sc-card{ flex-direction:column; align-items:flex-start; text-align:left; }
+  .sc-cta{ align-self:stretch; text-align:center; }
+  .wrap{ padding:26px 16px 70px; }
+  .grid{ grid-template-columns:1fr; }
+  .dict-banner{ flex-wrap:wrap; gap:13px; padding:16px; }
+  .dict-banner .db-cta{ width:100%; justify-content:center; }
+}
+
+/* ===== 홈 히어로 슬로건 (hub 전용 신규 클래스 — series/404가 공유하는 .top/.kicker/.sub 기존 규칙은 불변) ===== */
+.top .kicker.hero-kicker{ display:inline-flex; align-items:center; gap:7px; background:#fff;
+  border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-size:13px; }
+.top h1.hero-h1{ font-size:clamp(28px,4.4vw,50px); font-weight:920; letter-spacing:-.015em;
+  line-height:1.16; margin:14px auto 10px; max-width:820px; }
+.hero-h1 .hl-a{ color:var(--accent); }
+.top .hero-slogan2{ color:var(--fg); font-weight:800; font-size:clamp(16px,2.2vw,22px);
+  line-height:1.5; margin:0 auto 10px; max-width:720px; }
+.hero-slogan2 .hl-mark{ font-weight:900; padding:1px 5px; border-radius:5px;
+  background:linear-gradient(180deg, rgba(253,230,138,0) 46%, #FDE68A 46%); }
+.top p.sub.hero-fn{ font-size:clamp(13.5px,1.7vw,16px); color:var(--muted); }
+@media (max-width:560px){
+  .top h1.hero-h1{ letter-spacing:-.01em; }
+}
+
+/* ===== 바로 쓰는 자료실(/library/) + 홈 「자료실 입구」 — 2026-10-01 · 디자인 ① 미니멀 화이트 =====
+   글자는 build.mjs 7.6·libEntryHtml이 catalog.library에서 새김. 이모지 아이콘 없이 강조색(--accent) 하나만 쓴다. */
+.lb-entry{ margin:0 0 34px; }
+.lb-eh{ display:flex; align-items:baseline; justify-content:space-between; gap:6px 16px; margin:0 0 14px; }
+.lb-eh .hub-sec{ margin:0; }
+.lb-all{ flex:none; font-size:15px; font-weight:800; color:var(--accent); white-space:nowrap; }
+.lb-all:hover{ text-decoration:underline; text-underline-offset:3px; }
+.lb-doors{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.lb-door{ min-width:0; background:#fff; border:1px solid var(--line); border-radius:18px; padding:12px 16px 6px; }
+.lb-dk{ display:block; padding:2px 0 6px; font-size:13px; font-weight:800; letter-spacing:.04em; color:var(--muted); }
+.lb-dk:hover{ color:var(--fg); }
+.lb-di{ display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:46px; padding:8px 0; border-top:1px solid #EFEDE8; font-size:15.5px; font-weight:700; color:var(--fg); }
+.lb-di .t{ min-width:0; }
+a.lb-di .t::after{ content:" →"; color:#B5B9C0; font-weight:600; }
+a.lb-di:hover .t{ text-decoration:underline; text-underline-offset:3px; }
+.lb-di em{ flex:none; font-style:normal; font-size:13px; font-weight:700; color:var(--muted); font-variant-numeric:tabular-nums; }
+.lb-di.is-soon{ color:#9AA1AC; }
+@media (max-width:760px){
+  .lb-doors{ grid-template-columns:1fr; gap:10px; }
+  .lb-eh{ align-items:flex-end; }
+  .lb-eh .hub-sec small{ flex-basis:100%; }
+  .lb-all .lg{ display:none; }
+  .lb-door{ padding:10px 14px 4px; }
+  .lb-di{ min-height:44px; }
+}
+
+body.lb-page{ background:#fff; }
+.lb-wrap{ max-width:980px; margin:0 auto; padding:28px 22px 90px; }
+.lb-crumb{ display:flex; align-items:center; flex-wrap:wrap; gap:6px; font-size:13.5px; font-weight:600; color:var(--muted); }
+.lb-crumb a{ color:var(--muted); }
+.lb-crumb a:hover{ color:var(--fg); text-decoration:underline; }
+.lb-crumb [aria-current]{ color:var(--fg); }
+.lb-hd{ margin:16px 0 4px; }
+.lb-kick{ margin:0; font-size:13px; font-weight:600; letter-spacing:.03em; color:var(--muted); }
+.lb-ttl{ margin:6px 0 10px; font-size:clamp(32px,5vw,46px); font-weight:900; letter-spacing:-.045em; line-height:1.12; color:var(--fg); }
+.lb-sub{ margin:0; max-width:640px; font-size:clamp(15px,1.8vw,17px); line-height:1.6; color:var(--muted-strong); }
+.lb-steps{ list-style:none; margin:24px 0 10px; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid #EBEBEB; border-bottom:1px solid #EBEBEB; }
+.lb-steps li{ display:flex; align-items:center; gap:12px; min-width:0; padding:14px 16px; }
+.lb-steps li + li{ border-left:1px solid #EBEBEB; }
+.lb-steps b{ flex:none; display:grid; place-items:center; width:24px; height:24px; border-radius:50%; background:var(--fg); color:#fff; font-size:12.5px; font-weight:800; }
+.lb-steps strong{ display:block; font-size:15.5px; font-weight:800; color:var(--fg); }
+.lb-steps small{ display:block; font-size:13px; line-height:1.4; color:var(--muted); }
+.lb-first{ margin:0; font-size:14px; color:var(--muted); }
+.lb-first a{ color:var(--accent); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+.lb-chips{ position:sticky; top:0; z-index:5; display:flex; gap:22px; overflow-x:auto; margin:16px 0 0; border-bottom:1px solid #EBEBEB; background:#fff; scrollbar-width:none; }
+.lb-chips::-webkit-scrollbar{ display:none; }
+.lb-chips a{ flex:none; display:inline-flex; align-items:center; min-height:46px; margin-bottom:-1px; border-bottom:2px solid transparent; font-size:15px; font-weight:700; color:var(--muted); white-space:nowrap; }
+.lb-chips a i{ margin-left:5px; font-style:normal; font-weight:600; color:#B5B9C0; }
+.lb-chips a:hover, .lb-chips a.on{ color:var(--fg); border-bottom-color:var(--fg); }
+.lb-sec{ margin:36px 0 0; scroll-margin-top:62px; }
+.lb-sh{ display:flex; align-items:baseline; flex-wrap:wrap; gap:2px 10px; margin:0 0 14px; }
+.lb-sh-t{ font-size:22px; font-weight:900; letter-spacing:-.03em; color:var(--fg); }
+.lb-sh-s{ font-size:14px; font-weight:500; color:var(--muted); }
+.lb-grid, .lb-rows{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.lb-grid.n3{ grid-template-columns:repeat(3,minmax(0,1fr)); }   /* 큰 카드 3장 이상(build.mjs가 n3) — 2칸이면 3번째가 혼자 남음. 760px 이하 1칸은 아래 미디어쿼리 */
+.lb-card{ position:relative; display:flex; flex-direction:column; gap:8px; min-width:0; padding:18px; border-radius:20px; background:#F5F5F7; color:var(--fg); transition:background .15s ease; }
+a.lb-card:hover{ background:#EDEDF0; }
+.lb-img{ display:block; width:100%; max-width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; border-radius:12px; background:#1b4a30; }
+.lb-ph{ display:grid; place-items:center; width:100%; aspect-ratio:16/9; border-radius:12px; background:#ECECEF; color:#8A8F98; font-size:14px; font-weight:700; }
+/* 내용 미리보기(썸네일이 없을 때) — 그 페이지의 실제 제목·소제목을 작은 화면처럼 */
+.lb-pv{ display:flex; flex-direction:column; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:12px; background:#fff; border:1px solid #E6E6EA; container-type:inline-size; }
+.lb-pv-bar{ flex:none; display:flex; align-items:center; gap:5px; height:24px; padding:0 10px; background:#F0F0F3; border-bottom:1px solid #E6E6EA; font-size:11px; font-weight:600; color:#8A8F98; }
+.lb-pv-bar i{ flex:none; width:7px; height:7px; border-radius:50%; background:#D3D5DA; }
+.lb-pv-bar span{ margin-left:6px; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.lb-pv-body{ display:flex; flex-direction:column; gap:4px; min-height:0; padding:12px 14px; }
+.lb-pv-k{ font-size:11.5px; font-weight:800; letter-spacing:.03em; color:var(--accent); }
+.lb-pv-t{ font-size:17px; font-weight:900; letter-spacing:-.03em; line-height:1.25; color:var(--fg); display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.lb-pv-ul{ display:flex; flex-direction:column; gap:3px; margin-top:6px; padding-top:8px; border-top:1px solid #EFEFF2; }
+.lb-pv-li{ position:relative; padding-left:11px; font-size:13px; font-weight:600; line-height:1.5; color:#555B64; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.lb-pv-li::before{ content:""; position:absolute; left:0; top:.62em; width:4px; height:4px; border-radius:50%; background:#B5B9C0; }
+@container (max-width:380px){
+  .lb-pv-body{ padding:10px 12px; }
+  .lb-pv-t{ font-size:15.5px; -webkit-line-clamp:1; line-clamp:1; }
+  .lb-pv-li:nth-child(n+4){ display:none; }
+}
+.lb-ch{ display:flex; align-items:center; flex-wrap:wrap; gap:4px 8px; }
+.lb-t{ margin:0; font-size:18.5px; font-weight:800; letter-spacing:-.02em; line-height:1.3; }
+.lb-bd{ font-style:normal; font-size:12.5px; font-weight:700; color:var(--accent); }
+.lb-d{ display:block; font-size:14.5px; line-height:1.6; color:#555B64; }
+.lb-cm{ display:flex; align-items:baseline; flex-wrap:wrap; gap:2px 6px; font-size:13px; font-weight:600; color:var(--muted); }
+.lb-num{ font-size:30px; font-weight:900; letter-spacing:-.03em; line-height:1; color:var(--fg); font-variant-numeric:tabular-nums; }
+.lb-unit{ margin-right:4px; font-size:14px; font-weight:800; color:var(--fg); }
+.lb-cta{ align-self:flex-start; margin-top:auto; padding-top:4px; font-size:15px; font-weight:700; color:var(--accent); }
+a.lb-card:hover .lb-cta, a.lb-cta:hover{ text-decoration:underline; text-underline-offset:3px; }
+.lb-card.is-soon .lb-t{ color:#8A8F98; }
+.lb-row{ display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:6px 14px; }
+.lb-rb{ display:flex; flex-direction:column; gap:6px; min-width:0; }
+.lb-go{ font-size:20px; color:#B5B9C0; }
+a.lb-row:hover .lb-go{ color:var(--fg); }
+.lb-lessons{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.lb-ls{ display:block; min-width:0; padding:16px; border:1px solid #EBEBEB; border-radius:16px; color:var(--fg); }
+a.lb-ls:hover{ border-color:var(--fg); }
+.lb-ls small{ display:block; font-size:12.5px; font-weight:700; color:var(--accent); }
+.lb-ls b{ display:block; margin:2px 0 4px; font-size:17px; font-weight:800; }
+.lb-ls span{ display:block; font-size:13.5px; line-height:1.45; color:var(--muted); }
+.lb-ls.is-soon{ background:#F5F5F7; border-color:transparent; }
+.lb-ls.is-soon small{ color:var(--muted); }
+.lb-foot{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px 16px; margin-top:48px; padding-top:18px; border-top:1px solid #EBEBEB; font-size:13.5px; color:var(--muted); }
+.lb-foot p{ margin:0; }
+.lb-foot a{ color:var(--muted); }
+.lb-foot a:hover{ color:var(--fg); text-decoration:underline; }
+.lb-wrap a:focus-visible, .lb-entry a:focus-visible{ outline:3px solid #93B4F5; outline-offset:2px; border-radius:8px; }
+@media (max-width:760px){
+  .lb-grid, .lb-grid.n3, .lb-rows, .lb-lessons{ grid-template-columns:1fr; }
+  .lb-ph{ display:none; }
+}
+@media (max-width:560px){
+  .lb-wrap{ padding:22px 16px 80px; }
+  .lb-steps li{ flex-direction:column; justify-content:center; gap:6px; padding:12px 4px; text-align:center; }
+  .lb-steps small{ display:none; }
+  .lb-steps strong{ font-size:14.5px; }
+  .lb-card{ padding:16px; }
+  .lb-num{ font-size:28px; }
+}
+</style>
+<style>/* 업무 도구 주문 사전 — 페이지(tl-) + 앱 공통(ndt-) 스타일. 앱별 규칙은 apps/<id>.css 에서 [data-app="<id>"] 아래로만. */
+/* hidden 속성은 언제나 숨김 (display 규칙이 이기지 못하게 — 10/1 공개본에서 빈 글상자가 보이던 원인) */
+[hidden]{ display:none !important; }
+/* ── 페이지 ── */
+.tl-filter{ margin:22px 0 0; }
+.tl-search{ display:block; width:100%; min-height:48px; padding:10px 14px; border:1px solid #E3E3E6; border-radius:12px; background:#FAFAFA; font:inherit; font-size:16px; color:var(--fg); }
+.tl-search::placeholder{ color:#9AA1AC; }
+.tl-row{ margin:12px 0 0; }
+.tl-row-k{ margin:0 0 6px; font-size:12.5px; font-weight:800; letter-spacing:.03em; color:var(--muted); }
+.tl-chips{ display:flex; gap:6px; overflow-x:auto; padding-bottom:2px; scrollbar-width:none; }
+.tl-chips::-webkit-scrollbar{ display:none; }
+.tl-chip{ flex:none; min-height:40px; padding:0 13px; border:1px solid #E3E3E6; border-radius:999px; background:#fff; color:#444; font:inherit; font-size:14px; font-weight:700; white-space:nowrap; cursor:pointer; }
+.tl-chip[aria-pressed="true"]{ background:var(--fg); border-color:var(--fg); color:#fff; }
+.tl-chip i{ font-style:normal; margin-left:4px; font-weight:600; opacity:.55; }
+.tl-sec{ margin:36px 0 0; scroll-margin-top:16px; }
+.tl-sh{ display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px; margin:0 0 12px; font-size:22px; font-weight:900; letter-spacing:-.03em; color:var(--fg); }
+.tl-sh small{ font-size:14px; font-weight:600; letter-spacing:0; color:var(--muted); }
+.tl-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; align-items:start; }
+.tl-card{ display:flex; flex-direction:column; gap:12px; min-width:0; padding:14px; border-radius:20px; background:#F5F5F7; scroll-margin-top:16px; }
+.tl-card.wide{ grid-column:1 / -1; }
+.tl-body{ display:flex; flex-direction:column; gap:10px; min-width:0; }
+.tl-name{ margin:0; font-size:19px; font-weight:800; letter-spacing:-.02em; color:var(--fg); }
+.tl-desc{ margin:0; font-size:14.5px; line-height:1.6; color:#555B64; }
+.tl-tags{ display:flex; flex-wrap:wrap; gap:4px; }
+.tl-tags span{ font-size:12px; font-weight:700; padding:1px 9px; border-radius:999px; background:#E9EEFA; color:#314B86; }
+.tl-tags span.sh{ background:#ECECEF; color:#555B64; }
+.tl-tags span.xl{ background:#E7F6EC; color:#13703F; }
+.tl-tips{ padding:10px 12px; border-radius:14px; background:#fff; border:1px solid #EBEBEE; }
+.tl-tips-k{ margin:0 0 4px; font-size:13px; font-weight:800; color:var(--fg); }
+.tl-tips ul{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+.tl-tips li{ font-size:13.5px; line-height:1.55; color:#4B5059; }
+.tl-tips li b{ display:inline-block; margin-right:4px; padding:0 7px; border-radius:6px; background:#F1F3F7; font-size:12px; font-weight:800; color:#314B86; }
+.tl-tips li strong{ font-weight:700; color:var(--fg); }
+.tl-make{ display:flex; flex-direction:column; gap:8px; padding-top:10px; border-top:1px dashed #DADCE1; }
+.tl-make-k{ margin:0; font-size:14px; font-weight:800; color:var(--fg); }
+.tl-make-k small{ display:block; font-size:12.5px; font-weight:500; color:#6B717B; }
+.tl-env{ display:flex; gap:6px; flex-wrap:wrap; }
+.tl-envb{ flex:1 1 0; min-width:96px; min-height:46px; padding:4px 8px; border:1.5px solid #E3E3E6; border-radius:12px; background:#fff; color:#444; font:inherit; font-size:14px; font-weight:700; line-height:1.3; cursor:pointer; }
+.tl-envb small{ display:block; font-size:11px; font-weight:500; color:#8A8F98; }
+.tl-envb[aria-pressed="true"]{ border-color:var(--fg); background:var(--fg); color:#fff; }
+.tl-envb[aria-pressed="true"] small{ color:#C9CDD4; }
+.tl-prompt{ margin:0; max-height:220px; overflow:auto; padding:12px; border:1px solid #E3E3E6; border-radius:12px; background:#fff; white-space:pre-wrap; word-break:keep-all; overflow-wrap:break-word; font:inherit; font-size:13px; line-height:1.6; color:#333; }
+.tl-cprow{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.tl-copy{ min-height:46px; padding:0 18px; border:0; border-radius:12px; background:var(--accent); color:#fff; font:inherit; font-size:15px; font-weight:800; cursor:pointer; }
+.tl-copy.done{ background:#0D7A43; }
+.tl-cpn{ font-size:12.5px; color:#8A8F98; }
+.tl-fb{ display:block; width:100%; height:180px; padding:10px; border:1px solid #E3E3E6; border-radius:10px; background:#fff; color:#333; font:inherit; font-size:13px; line-height:1.5; }
+.tl-soon{ margin:14px 0 0; padding:12px 14px; border:1px dashed #D6D8DD; border-radius:16px; }
+.tl-soon-k{ margin:0 0 8px; font-size:13px; font-weight:800; color:#6B717B; }
+.tl-soon ul{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px; }
+.tl-soon li{ padding:3px 10px; border-radius:999px; background:#F3F4F6; font-size:13px; font-weight:600; color:#6B717B; }
+.tl-soon li em{ font-style:normal; font-size:11px; font-weight:800; margin-left:4px; color:#8A6D00; }
+.tl-empty{ margin:24px 0 0; padding:16px; border:1px dashed #D3D5DA; border-radius:16px; color:#555B64; font-size:15px; }
+.tl-empty b{ color:var(--fg); }
+.tl-chip:focus-visible,.tl-envb:focus-visible,.tl-copy:focus-visible,.tl-search:focus-visible{ outline:3px solid #93B4F5; outline-offset:2px; }
+@media (max-width:760px){ .tl-grid{ grid-template-columns:minmax(0,1fr); } }
+
+/* ── 목록: 타일 (대표 결정 L1·L2·L4, 2026-10-02) — 같은 크기라 줄이 저절로 맞음 ── */
+.tl-tiles{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.tl-tile{ min-width:0; display:flex; scroll-margin-top:16px; }
+.tl-tile-a{ display:flex; flex-direction:column; width:100%; padding:10px; border-radius:18px; background:#F5F5F7; color:inherit; text-decoration:none; transition:background .15s; }
+.tl-tile-a:hover{ background:#ECEDF1; }
+.tl-tile-a:focus-visible{ outline:3px solid #93B4F5; outline-offset:2px; }
+.tl-tile-pv{ display:block; aspect-ratio:47 / 30; overflow:hidden; border-radius:12px; background:#fff; border:1px solid #E6E7EB; }
+.tl-tile-pv img{ display:block; width:100%; height:100%; object-fit:cover; object-position:top center; }
+.tl-tile-b{ display:flex; flex-direction:column; gap:5px; flex:1; padding:10px 4px 2px; min-width:0; }
+.tl-tile .tl-name{ font-size:17px; }
+.tl-tile .tl-desc{ font-size:13.5px; line-height:1.55; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.tl-tile .tl-tags{ margin-top:1px; }
+.tl-open{ margin-top:auto; padding-top:6px; font-size:14px; font-weight:800; color:var(--accent); }
+@media (max-width:900px){ .tl-tiles{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } }
+@media (max-width:560px){
+  .tl-tile-a{ padding:7px; border-radius:14px; }
+  .tl-tile-pv{ border-radius:9px; }
+  .tl-tile-b{ padding:8px 2px 2px; gap:3px; }
+  .tl-tile .tl-name{ font-size:15px; line-height:1.35; }
+  .tl-tile .tl-desc{ font-size:12.5px; }
+  .tl-tile .tl-tags{ display:none; }
+  .tl-open{ font-size:13px; }
+}
+/* ── 도구 페이지 (/tools/<id>/) — 맨 위 도구 → 이럴 때 좋아요 → 프롬프트 → 같은 칸 다른 도구 (L3) ── */
+.tl-crumb{ display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:0 0 6px; font-size:13px; font-weight:600; color:#5B6470; }
+.tl-crumb a{ color:#5B6470; text-decoration:none; } .tl-crumb a:hover{ color:#111; text-decoration:underline; }
+.tl-crumb [aria-current]{ color:#1A1A1A; }
+.tl-dhd{ margin:6px 0 14px; }
+.tl-dttl{ margin:4px 0 6px; font-size:clamp(26px,4.4vw,38px); font-weight:900; letter-spacing:-.04em; line-height:1.15; color:var(--fg); }
+.tl-dsub{ margin:0 0 8px; max-width:720px; font-size:15.5px; line-height:1.6; color:var(--muted-strong); }
+.tl-dcard{ padding:16px; }
+.tl-dcard:not(.wide){ display:grid; grid-template-columns:minmax(0,500px) minmax(0,1fr); gap:20px; align-items:start; }
+.tl-dcard.wide .tl-body{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:20px; align-items:start; }
+.tl-dcard.wide .tl-make{ border-top:0; padding-top:0; }
+.tl-more{ margin:34px 0 0; }
+.tl-more .tl-sh{ font-size:20px; }
+.tl-more .tl-tiles + .tl-sh{ margin-top:26px; }
+.tl-tile-pv.is-empty{ background:#ECEDF1; }
+.tl-pn{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px 16px; margin:16px 0 0; font-size:14.5px; font-weight:700; }
+.tl-pn a{ color:var(--accent); text-decoration:none; } .tl-pn a:hover{ text-decoration:underline; }
+.tl-all{ display:inline-flex; align-items:center; min-height:44px; margin-top:14px; padding:0 16px; border-radius:12px; border:1.5px solid var(--fg); color:var(--fg); font-weight:800; text-decoration:none; }
+@media (max-width:900px){ .tl-dcard:not(.wide){ display:flex; align-items:stretch; } .tl-dcard.wide .tl-body{ display:flex; } .tl-dcard.wide .tl-make{ border-top:1px dashed #DADCE1; padding-top:10px; } }
+@media (max-width:560px){ .tl-dcard{ padding:12px; } }
+
+/* ── 앱 공통 ── */
+.tl-app{ position:relative; min-width:0; padding:12px; border-radius:14px; background:#fff; border:1px solid #E6E7EB; color:#1A1A1A; font-size:14px; line-height:1.5; }
+.tl-app.ndt-dark{ background:#11151F; border-color:#11151F; color:#E7E9EC; }
+.tl-app-ph{ margin:0; padding:24px 0; text-align:center; color:#8A8F98; font-size:13px; }
+.tl-app.ndt-ready .tl-app-ph{ display:none; }
+.tl-app *{ box-sizing:border-box; }
+.tl-app button{ font:inherit; }
+.ndt-btn{ display:inline-flex; align-items:center; justify-content:center; gap:4px; min-height:40px; padding:0 14px; border:1px solid #D9DCE1; border-radius:10px; background:#fff; color:#1A1A1A; font:inherit; font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; }
+.ndt-btn:hover{ border-color:#B9BEC7; }
+.ndt-btn.pri{ background:#1A1A1A; border-color:#1A1A1A; color:#fff; }
+.ndt-btn.acc{ background:var(--accent); border-color:var(--accent); color:#fff; }
+.ndt-btn.ghost{ background:transparent; }
+.ndt-btn.sm{ min-height:32px; padding:0 10px; font-size:13px; border-radius:8px; }
+.ndt-btn.ndt-ok{ background:#0D7A43; border-color:#0D7A43; color:#fff; }
+.ndt-btn.ndt-arm, .ndt-dark .ndt-btn.ndt-arm{ background:#B42318; border-color:#B42318; color:#fff; white-space:normal; line-height:1.2; font-size:12.5px; overflow:hidden; }
+.ndt-btn.ndt-arm.ndt-arm-grow{ white-space:nowrap; width:auto; }
+.ndt-sr{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+.ndt-btn:disabled{ opacity:.5; cursor:default; }
+.ndt-dark .ndt-btn{ background:#1C2230; border-color:#39414F; color:#E7E9EC; }
+.ndt-dark .ndt-btn.pri{ background:#E7E9EC; border-color:#E7E9EC; color:#11151F; }
+.ndt-in{ width:100%; min-height:40px; padding:6px 10px; border:1px solid #D9DCE1; border-radius:9px; background:#FAFAFB; color:#1A1A1A; font:inherit; font-size:14px; }
+.ndt-in:focus{ outline:none; border-color:var(--accent); background:#fff; }
+@media (max-width:560px){ .ndt-in, .tl-app input, .tl-app textarea, .tl-app select{ font-size:16px; } }   /* 아이폰: 16px 미만 칸을 누르면 화면이 확대됨 */
+textarea.ndt-in{ min-height:90px; resize:vertical; line-height:1.5; }
+.ndt-dark .ndt-in{ background:#1A2030; border-color:#39414F; color:#E7E9EC; }
+.ndt-row{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.ndt-col{ display:flex; flex-direction:column; gap:6px; }
+.ndt-muted{ color:#6B717B; font-size:12.5px; }
+.ndt-dark .ndt-muted{ color:#9BA3AE; }
+.ndt-k{ margin:0; font-size:12.5px; font-weight:800; color:#4B5059; }
+.ndt-dark .ndt-k{ color:#C7CCD4; }
+.ndt-fb{ display:block; width:100%; min-height:120px; margin-top:8px; padding:8px; border:1.5px solid #F2B24C; border-radius:10px; font:inherit; font-size:12.5px; }
+.ndt-err{ margin:0; padding:16px; color:#B42318; font-size:13.5px; }
+.tl-app button:focus-visible, .tl-app input:focus-visible, .tl-app textarea:focus-visible, .tl-app select:focus-visible{ outline:3px solid #93B4F5; outline-offset:2px; }
+/* 크게 보기 */
+.tl-app.ndt-big{ position:fixed; inset:0; z-index:2147482500; margin:0; border-radius:0; overflow:auto; padding:clamp(16px,4vw,48px); }
+html.ndt-big-open{ overflow:hidden; }
+.ndt-big-x{ position:fixed; top:12px; right:12px; z-index:2; min-height:40px; padding:0 14px; border:1px solid #39414F; border-radius:10px; background:#1C2230; color:#E7E9EC; font-weight:800; cursor:pointer; }
+.tl-app:not(.ndt-dark) .ndt-big-x{ background:#fff; color:#1A1A1A; border-color:#D9DCE1; }
+/* 인쇄 */
+#ndt-print{ display:none; }
+@media print{
+  body.ndt-printing > *{ display:none !important; }
+  body.ndt-printing > #ndt-print{ display:block !important; }
+  #ndt-print{ font-family:var(--font); color:#000; }
+  #ndt-print .ndt-ptitle{ font-size:20px; margin:0 0 12px; }
+  #ndt-print .ndt-pv{ white-space:pre-wrap; }
+  #ndt-print, #ndt-print *{ font-variant-numeric:normal !important; }   /* PDF로 저장했을 때 숫자 복사·검색되게 */
+  .tl-app.ndt-dark{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }   /* 페이지째 인쇄할 때 어두운 카드 배경 유지 */
+  @page{ margin:14mm; }
+}
+@media (prefers-reduced-motion: reduce){ .tl-app *{ transition:none !important; animation:none !important; } }
+
+/* ── 목록 3칸(2026-10-03, 10/2 밤 디자인 V1·V2 반영) ──
+   왼쪽 📖 사용 설명서 = 연한 파랑 패널 · 가운데 도구 = 흰 바탕 · 오른쪽 🔥 순위 = 모션 사전과 같은 남색 카드
+   글자: 본문 16px · 단계 제목 17px · 칸 제목 18px (대표 «글자가 작고 칸 구분이 안 된다»)
+   1360px 이상 = 세 칸(양옆은 따라 내려옴) / 그보다 좁으면 설명서는 접힌 상자, 순위는 찾기 아래 한 줄 띠(폰 TOP 5) */
+.tl-layout{ display:block; }
+.tl-man-wrap{ margin:18px 0 0; }
+.tl-man{ border:1px solid #C7DBFB; border-radius:16px; background:#F1F6FE; }
+.tl-man > summary{ list-style:none; cursor:pointer; display:flex; align-items:center; flex-wrap:wrap; gap:4px 10px; min-height:52px; padding:12px 16px; font-size:18px; font-weight:800; color:#1E3A8A; }
+.tl-man > summary::-webkit-details-marker{ display:none; }
+.tl-man > summary::after{ content:'펼치기 ▾'; margin-left:auto; font-size:14px; font-weight:700; color:#2563EB; }
+.tl-man[open] > summary::after{ content:'접기 ▴'; }
+.tl-man > summary small{ font-size:14px; font-weight:600; color:#3B5BA9; }
+.tl-man-steps{ list-style:none; counter-reset:man; margin:0; padding:2px 16px 8px; }
+.tl-man-steps > li{ counter-increment:man; position:relative; padding:14px 0 14px 42px; border-top:1px solid #D6E4FB; }
+.tl-man-steps > li::before{ content:counter(man); position:absolute; left:0; top:13px; display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:#2563EB; color:#fff; font-size:15px; font-weight:800; }
+.tl-man-steps b{ display:block; font-size:17px; line-height:1.4; color:#14213D; }
+.tl-man-steps p{ margin:4px 0 0; font-size:16px; line-height:1.6; color:#334155; }
+.tl-man-steps em{ font-style:normal; font-weight:800; color:#1E3A8A; }
+.tl-man-env{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:6px; }
+.tl-man-env li{ font-size:15px; line-height:1.5; color:#334155; background:#fff; border:1px solid #D6E4FB; border-radius:10px; padding:7px 10px; }
+.tl-man-env strong{ display:block; font-size:15.5px; color:#1E3A8A; }
+.tl-man-faq{ padding:6px 16px 14px; border-top:1px solid #D6E4FB; }
+.tl-man-k{ margin:10px 0 4px; font-size:14px; font-weight:800; letter-spacing:.02em; color:#3B5BA9; }
+.tl-man-faq summary{ cursor:pointer; padding:9px 2px; min-height:40px; font-size:16px; font-weight:700; color:#14213D; }
+.tl-man-faq details p{ margin:0 0 10px; padding:0 2px; font-size:15.5px; line-height:1.6; color:#334155; }
+
+.rank-rail{ display:none; }
+/* 좁은 화면 띠: 남색(넓은 화면 카드와 같은 색) */
+.rank-strip{ display:flex; align-items:center; gap:10px; margin:16px 0 0; padding:9px 12px; background:#0F172A; border-radius:14px; overflow-x:auto; scrollbar-width:none; white-space:nowrap; }
+.rank-strip:empty{ display:none; }
+.rank-strip::-webkit-scrollbar{ display:none; }
+.rank-strip .rk-lab{ flex:0 0 auto; font-size:15px; font-weight:900; color:#fff; }
+.rk-chips{ display:flex; gap:6px; list-style:none; margin:0; padding:0; }
+.rk-chips a{ display:inline-flex; align-items:center; gap:5px; min-height:36px; font-size:15px; font-weight:700; color:#F1F5F9; text-decoration:none; background:#1E293B; border:1px solid #334155; border-radius:999px; padding:5px 13px; }
+.rk-chips a:hover, .rk-chips a:focus-visible{ border-color:#FDE68A; }
+.rk-chips b{ color:#FDE68A; font-weight:900; }
+.rank-strip .rk-when{ flex:0 0 auto; font-size:13px; color:#94A3B8; font-weight:600; }
+.rk-d{ font-size:12.5px; font-weight:900; font-style:normal; }
+.rk-d.up{ color:#FCA5A5; } .rk-d.down{ color:#93C5FD; } .rk-d.same{ color:#94A3B8; } .rk-d.new{ color:#fff; background:#E11D48; border-radius:6px; padding:0 6px; }
+.rank-box{ background:#0F172A; color:#E5E9F0; border-radius:18px; padding:18px 14px 14px; box-shadow:0 1px 2px rgba(0,0,0,.06), 0 10px 28px rgba(15,23,42,.18); }
+.rank-box .rk-h{ margin:0; font-size:18px; font-weight:900; color:#fff; }
+.rank-box .rk-sub{ margin:4px 0 12px; font-size:14px; line-height:1.55; color:#93C5FD; }
+.rk-list{ list-style:none; margin:0; padding:0; display:grid; gap:3px; }
+.rk-list a{ display:grid; grid-template-columns:24px minmax(0,1fr) auto; gap:3px 10px; align-items:center; min-height:46px; padding:8px 9px; border-radius:11px; text-decoration:none; color:#F1F5F9; }
+.rk-list a:hover, .rk-list a:focus-visible{ background:#1E293B; }
+.rk-list i{ font-style:normal; font-size:16px; font-weight:900; color:#FDE68A; text-align:right; }
+.rk-list .rk-n{ font-size:16px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.rk-list .rk-c{ font-size:13.5px; color:#CBD5E1; white-space:nowrap; }
+.rk-list .rk-bar{ grid-column:2 / 4; height:6px; background:#1E293B; border-radius:3px; overflow:hidden; }
+.rk-list .rk-bar em{ display:block; height:100%; background:#F43F5E; border-radius:3px; }
+.rank-box .rk-note{ margin:12px 2px 0; font-size:13.5px; line-height:1.55; color:#94A3B8; }
+@media (max-width:560px){ .rk-chips li:nth-child(n+6){ display:none; } }
+@media (min-width:1360px){
+  .lb-wrap:has(.tl-layout){ max-width:1560px; }
+  .tl-layout{ display:grid; grid-template-columns:300px minmax(0,1fr) 272px; gap:30px; align-items:start; }
+  .tl-man-wrap, .rank-rail{ position:sticky; top:14px; max-height:calc(100vh - 28px); overflow:auto; scrollbar-width:thin; }
+  .tl-man-wrap{ margin:22px 0 0; }
+  .tl-man > summary::after, .tl-man[open] > summary::after{ content:none; }
+  .rank-rail{ display:block; margin:22px 0 0; }
+  .rank-strip{ display:none; }
+}
+@media (max-width:560px){ .tl-man > summary small{ display:none; } }
+</style>
+<!--NDLIB-H:START--><style>.ndlib-crumb{display:flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:1100px;margin:0 auto;padding:12px 16px 0;font:600 13px/1.5 "Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#5B6470;position:relative;z-index:2;word-break:keep-all}.ndlib-crumb a{color:#5B6470;text-decoration:none}.ndlib-crumb a:hover{color:#111;text-decoration:underline}.ndlib-crumb [aria-current]{color:#1A1A1A}.ndlib-crumb a:focus-visible{outline:3px solid #93B4F5;outline-offset:2px;border-radius:4px}@media (max-width:640px){.ndlib-crumb.nd-f2{padding-right:184px}.ndlib-crumb.nd-f1{padding-right:124px}}</style><!--NDLIB-H:END-->
+<style>.tl-layout{display:block!important;grid-template-columns:1fr!important}.tl-main{max-width:1100px;margin:0 auto}</style><style>.lb-hd{max-width:1100px;margin-left:auto;margin-right:auto}</style></head>
+<body class="lb-page">
+<!--NDLIB-B:START--><!--NDLIB-B:END-->
+<div class="lb-wrap">
+  <header class="lb-hd">
+    <p class="lb-kick">달큼하오 · 내 작업공간</p>
+    <h1 class="lb-ttl">달큼하오 작업공간</h1>
+    <p class="lb-sub">스마트스토어·쇼핑몰 운영에 맞춰 고른 업무 도구 15개. 하나를 눌러 바로 쓰세요. 로그인 없이 무료, 입력 내용은 내 브라우저에만 저장돼요.</p>
+  </header>
+
+  
+
+  <div class="tl-layout">
+  
+
+  <div class="tl-main"><section class="tl-sec" id="g0"><h2 class="tl-sh">가격·세금 계산 <small>상품 가격, 마진, 부가세를 정리할 때 · 3개</small></h2><div class="tl-tiles"><article class="tl-tile" id="margin-calculator" data-tool="margin-calculator" data-scene="calc" data-who="sales acct shop" data-shape="calc" data-text="단가·마진 계산기 원가와 판매가를 넣으면 개당 이익·마진율·원가 대비 이익률이 바로 나와요. 반대로 목표 마진율을 넣으면 팔아야 할 값을 끝자리까지 올려 알려 주고, 카드·배달앱 수수료와 배송비도 빼서 계산해요. 마진 계산기 마진율 이익률 마크업 원가 판매가 단가 정하기 가격 책정 소비자가 도매가 납품가 공급가 부가세 포함 부가세 별도 VAT 1.1 카드 수수료 배달앱 수수료 오픈마켓 수수료 배송비 포장비 개당 이익 손익 손해 역마진 목표 마진 끝자리 올림 100원 단위 1000원 단위 8만9천 품목 비교 메뉴 가격 쇼핑몰 스마트스토어 손익분기 고정비 임대료 판매량 레시피 원가 재료비 쿠폰 할인 단가 인하 마지노선 최저가 사장님 가게 카페 식당 영업 회계 경리 계산·견적 계산기 영업 회계 사장님(가게)">
+        <a class="tl-tile-a" href="/tools/margin-calculator/">
+          <span class="tl-tile-pv"><img src="/tools/previews/margin-calculator.jpg" alt="단가·마진 계산기 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">단가·마진 계산기</h3>
+            <p class="tl-desc">원가와 판매가를 넣으면 개당 이익·마진율·원가 대비 이익률이 바로 나와요. 반대로 목표 마진율을 넣으면 팔아야 할 값을 끝자리까지 올려 알려 주고, 카드·배달앱 수수료와 배송비도 빼서 계산해요.</p>
+            <div class="tl-tags"><span class="sh">계산·견적</span><span>영업</span><span>회계</span><span>사장님(가게)</span><span class="sh">계산기</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article><article class="tl-tile" id="vat-reverse" data-tool="vat-reverse" data-scene="calc" data-who="acct sales shop" data-shape="calc" data-text="부가세 역산기 부가세가 들어간 합계에서 공급가액과 부가세를 나눠 주고, 반대로 공급가액에서 부가세와 합계도 구해요. 1원 끝수 처리를 고를 수 있고, 엑셀 금액 열을 붙여 넣으면 줄마다 계산해 엑셀(CSV)로 저장해요. 부가세 역산 부가세 계산기 공급가액 계산 공급가 부가세 포함 부가세 별도 VAT 10% 1.1 나누기 합계 금액 세금계산서 계산서 영수증 끝수 처리 1원 차이 반올림 버림 올림 절사 면세 비과세 과세 매출 매입 거래처 정산 경리 회계 총무 사장님 가게 엑셀 붙여넣기 CSV 일괄 계산 여러 건 카드 매출 전표 견적 공급대가 10/11 부가세 빼기 부가세 더하기 반품 마이너스 홈택스 세금계산서 검산 계산·견적 계산기 회계 영업 사장님(가게)">
+        <a class="tl-tile-a" href="/tools/vat-reverse/">
+          <span class="tl-tile-pv"><img src="/tools/previews/vat-reverse.jpg" alt="부가세 역산기 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">부가세 역산기</h3>
+            <p class="tl-desc">부가세가 들어간 합계에서 공급가액과 부가세를 나눠 주고, 반대로 공급가액에서 부가세와 합계도 구해요. 1원 끝수 처리를 고를 수 있고, 엑셀 금액 열을 붙여 넣으면 줄마다 계산해 엑셀(CSV)로 저장해요.</p>
+            <div class="tl-tags"><span class="sh">계산·견적</span><span>회계</span><span>영업</span><span>사장님(가게)</span><span class="sh">계산기</span><span class="xl">엑셀 연결</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article><article class="tl-tile" id="quote-calculator" data-tool="quote-calculator" data-scene="calc" data-who="sales ga shop" data-shape="calc" data-text="견적서 계산기 품목·수량·단가만 넣으면 공급가·부가세 10%·합계가 바로 계산돼요. 엑셀 품목표를 붙여 넣고, 받는 곳과 날짜를 적어 견적서로 인쇄하거나 PDF로 저장하세요. 견적서 견적 계산기 견적서 양식 부가세 공급가 합계 단가 수량 품목 VAT 끝자리 버림 절사 인쇄 PDF 엑셀 붙여넣기 거래처 영업 총무 사장님 가게 단체 주문 할인 네고 예산 소계 일금 원정 유효기간 납기 규격 용역 인건비 계산·견적 계산기 영업 총무 사장님(가게)">
+        <a class="tl-tile-a" href="/tools/quote-calculator/">
+          <span class="tl-tile-pv"><img src="/tools/previews/quote-calculator.jpg" alt="견적서 계산기 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">견적서 계산기</h3>
+            <p class="tl-desc">품목·수량·단가만 넣으면 공급가·부가세 10%·합계가 바로 계산돼요. 엑셀 품목표를 붙여 넣고, 받는 곳과 날짜를 적어 견적서로 인쇄하거나 PDF로 저장하세요.</p>
+            <div class="tl-tags"><span class="sh">계산·견적</span><span>영업</span><span>총무</span><span>사장님(가게)</span><span class="sh">계산기</span><span class="xl">엑셀 연결</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article></div></section><section class="tl-sec" id="g1"><h2 class="tl-sh">고객 응대(CS) <small>문의·교환·반품 답변과 상담 기록 · 3개</small></h2><div class="tl-tiles"><article class="tl-tile" id="reply-library" data-tool="reply-library" data-scene="customer" data-who="cs sales shop" data-shape="collect" data-text="응대 답변 모음 자주 받는 질문과 답변을 모아 두고, 낱말로 찾아 「답변 복사」 한 번에 문자·메일·채팅 창에 붙여 넣어요. 배송·환불·예약 같은 분류 칩으로 걸러 볼 수도 있어요. 응대 답변 모음 자주 묻는 질문 FAQ 고객 응대 상담 답변 문구 상용구 상용문 매크로 답장 템플릿 자주 쓰는 문구 답변집 문의 답변 배송 환불 교환 예약 결제 견적 세금계산서 영업시간 CS 고객센터 고객 응대 모음·검색 고객 상담 영업 사장님(가게)">
+        <a class="tl-tile-a" href="/tools/reply-library/">
+          <span class="tl-tile-pv"><img src="/tools/previews/reply-library.jpg" alt="응대 답변 모음 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">응대 답변 모음</h3>
+            <p class="tl-desc">자주 받는 질문과 답변을 모아 두고, 낱말로 찾아 「답변 복사」 한 번에 문자·메일·채팅 창에 붙여 넣어요. 배송·환불·예약 같은 분류 칩으로 걸러 볼 수도 있어요.</p>
+            <div class="tl-tags"><span class="sh">고객 응대</span><span>고객 상담</span><span>영업</span><span>사장님(가게)</span><span class="sh">모음·검색</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article><article class="tl-tile" id="consult-log" data-tool="consult-log" data-scene="customer" data-who="cs sales edu shop" data-shape="collect" data-text="상담 기록 카드 고객과 나눈 상담을 카드로 남기고, 다음에 연락할 날짜를 적어 두면 맨 위에 「오늘·지난 연락 약속」으로 모아 보여 줘요. 이름을 누르면 그 고객과의 이력이 한눈에 보이고, 엑셀로도 내보낼 수 있어요. 상담 기록 상담 일지 상담 카드 고객 상담 상담 내역 고객 관리 고객 이력 고객 카드 CRM 영업 일지 영업 관리 콜 기록 전화 상담 방문 상담 문의 기록 문의 관리 클레임 불만 처리 후속 연락 팔로업 리콜 다시 연락 약속 날짜 할 일 견적 계약 상담 메모 학부모 상담 수강생 상담 회원 상담 단골 손님 엑셀 CSV 내보내기 찾기 연락처 민원 처리 불만 접수 처리 기한 상담 요약 콜백 재연락 고객 응대 동의 고객 응대 모음·검색 고객 상담 영업 교육 담당 사장님(가게)">
+        <a class="tl-tile-a" href="/tools/consult-log/">
+          <span class="tl-tile-pv"><img src="/tools/previews/consult-log.jpg" alt="상담 기록 카드 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">상담 기록 카드</h3>
+            <p class="tl-desc">고객과 나눈 상담을 카드로 남기고, 다음에 연락할 날짜를 적어 두면 맨 위에 「오늘·지난 연락 약속」으로 모아 보여 줘요. 이름을 누르면 그 고객과의 이력이 한눈에 보이고, 엑셀로도 내보낼 수 있어요.</p>
+            <div class="tl-tags"><span class="sh">고객 응대</span><span>고객 상담</span><span>영업</span><span>교육 담당</span><span>사장님(가게)</span><span class="sh">모음·검색</span><span class="xl">엑셀 연결</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article><article class="tl-tile" id="email-composer" data-tool="email-composer" data-scene="doc" data-who="all sales ga" data-shape="form" data-text="메일 문구 조립기 상황(요청·사과·독촉·감사·안내·거절·일정 확인)과 받는 사람, 핵심 내용 몇 줄만 고르면 제목과 본문이 인사부터 서명까지 갖춰져 나와요. 정중함을 3단계로 바꾸고 제목·본문을 따로 복사해 메일 창에 붙이세요. 메일 문구 이메일 작성 메일 쓰는 법 업무 메일 비즈니스 메일 메일 양식 메일 템플릿 메일 예문 메일 예시 메일 제목 인사말 맺음말 서명 요청 메일 부탁 메일 사과 메일 독촉 메일 재요청 리마인드 회신 요청 답장 감사 메일 안내 메일 거절 메일 정중한 거절 일정 확인 미팅 확인 거래처 메일 첫 메일 견적 요청 자료 요청 존댓말 높임말 말투 정중함 문장 다듬기 영업 총무 신입사원 복사 메일 창 문서·보고 양식·작성기 모든 직장인 영업 총무">
+        <a class="tl-tile-a" href="/tools/email-composer/">
+          <span class="tl-tile-pv"><img src="/tools/previews/email-composer.jpg" alt="메일 문구 조립기 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">메일 문구 조립기</h3>
+            <p class="tl-desc">상황(요청·사과·독촉·감사·안내·거절·일정 확인)과 받는 사람, 핵심 내용 몇 줄만 고르면 제목과 본문이 인사부터 서명까지 갖춰져 나와요. 정중함을 3단계로 바꾸고 제목·본문을 따로 복사해 메일 창에 붙이세요.</p>
+            <div class="tl-tags"><span class="sh">문서·보고</span><span>모든 직장인</span><span>영업</span><span>총무</span><span class="sh">양식·작성기</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article></div></section><section class="tl-sec" id="g2"><h2 class="tl-sh">주문·명단 정리 <small>주문서와 발송 목록을 엑셀에서 붙여 넣어 맞출 때 · 2개</small></h2><div class="tl-tiles"><article class="tl-tile" id="roster-match" data-tool="roster-match" data-scene="excel" data-who="hr ga edu" data-shape="compare" data-text="명단 대조기 엑셀에서 명단 두 개를 복사해 붙여 넣으면 양쪽에 다 있는 사람, 한쪽에만 있는 사람, 한 명단에 두 번 들어간 사람을 바로 골라 줘요. 띄어쓰기·하이픈이 달라도 같은 사람으로 맞추고, 결과는 복사하거나 엑셀(CSV)로 저장하세요. 명단 대조 명단 비교 엑셀 비교 두 명단 비교 출석 확인 신청자 출석자 불참자 미제출자 미응답자 누락 빠진 사람 중복 찾기 겹치는 이름 동명이인 생년월일 vlookup 브이룩업 교육 참석 설문 미응답 수료 명단 카톡 참석자 인사 총무 교육 담당 엑셀·명단 정리 대조·비교 인사 총무 교육 담당">
+        <a class="tl-tile-a" href="/tools/roster-match/">
+          <span class="tl-tile-pv"><img src="/tools/previews/roster-match.jpg" alt="명단 대조기 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">명단 대조기</h3>
+            <p class="tl-desc">엑셀에서 명단 두 개를 복사해 붙여 넣으면 양쪽에 다 있는 사람, 한쪽에만 있는 사람, 한 명단에 두 번 들어간 사람을 바로 골라 줘요. 띄어쓰기·하이픈이 달라도 같은 사람으로 맞추고, 결과는 복사하거나 엑셀(CSV)로 저장하세요.</p>
+            <div class="tl-tags"><span class="sh">엑셀·명단 정리</span><span>인사</span><span>총무</span><span>교육 담당</span><span class="sh">대조·비교</span><span class="xl">엑셀 연결</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article><article class="tl-tile" id="duplicate-finder" data-tool="duplicate-finder" data-scene="excel" data-who="all ga hr edu" data-shape="compare" data-text="중복 찾기 엑셀 명단을 복사해 붙여 넣으면 한 명단 안에 두 번 이상 들어간 줄을 묶어서 몇 번째 줄인지 보여 줘요. 이름+전화처럼 여러 칸을 묶어 비교하고, 띄어쓰기·하이픈이 달라도 같은 줄로 잡아요. 첫 줄만 남긴 정리본을 엑셀(CSV)로 저장하세요. 중복 찾기 중복 제거 중복 확인 중복값 겹치는 줄 두 번 들어간 사람 중복 신청 중복 응답 엑셀 중복 제거 엑셀 중복 찾기 고유값 하나만 남기기 첫 줄만 남기기 명단 정리 고객 명단 회원 명단 신청자 명단 주소록 연락처 정리 전화번호 하이픈 띄어쓰기 대소문자 이메일 중복 동명이인 이름 전화 묶어 비교 조건부 서식 COUNTIF 카운트이프 데이터 정리 CSV 총무 인사 교육 담당 설문 중복 응답 경품 중복 당첨 동일인 같은 사람 두 번 오타 비슷한 이름 직함 떼기 구글 설문 응답 시트 엑셀·명단 정리 대조·비교 모든 직장인 총무 인사 교육 담당">
+        <a class="tl-tile-a" href="/tools/duplicate-finder/">
+          <span class="tl-tile-pv"><img src="/tools/previews/duplicate-finder.jpg" alt="중복 찾기 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">중복 찾기</h3>
+            <p class="tl-desc">엑셀 명단을 복사해 붙여 넣으면 한 명단 안에 두 번 이상 들어간 줄을 묶어서 몇 번째 줄인지 보여 줘요. 이름+전화처럼 여러 칸을 묶어 비교하고, 띄어쓰기·하이픈이 달라도 같은 줄로 잡아요. 첫 줄만 남긴 정리본을 엑셀(CSV)로 저장하세요.</p>
+            <div class="tl-tags"><span class="sh">엑셀·명단 정리</span><span>모든 직장인</span><span>총무</span><span>인사</span><span>교육 담당</span><span class="sh">대조·비교</span><span class="xl">엑셀 연결</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article></div></section><section class="tl-sec" id="g3"><h2 class="tl-sh">오늘 할 일·일정 <small>매일 운영 루틴과 마감 관리 · 7개</small></h2><div class="tl-tiles"><article class="tl-tile" id="today-three" data-tool="today-three" data-scene="time" data-who="all" data-shape="board" data-text="오늘 할 일 3개 보드 오늘 꼭 끝낼 일 3개만 크게 적고, 끝나면 눌러서 줄을 그어요. 날짜가 바뀌면 새 판이 열리고, 어제 못 한 일은 버튼 하나로 가져와요. 오늘 할 일 3개 투두 할일 목록 우선순위 to do 하루 계획 집중 줄 긋기 완료 체크 어제 못 한 일 이월 미루기 업무 정리 직장인 신입 재택 시간 관리 보드·목록 모든 직장인">
+        <a class="tl-tile-a" href="/tools/today-three/">
+          <span class="tl-tile-pv"><img src="/tools/previews/today-three.jpg" alt="오늘 할 일 3개 보드 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">오늘 할 일 3개 보드</h3>
+            <p class="tl-desc">오늘 꼭 끝낼 일 3개만 크게 적고, 끝나면 눌러서 줄을 그어요. 날짜가 바뀌면 새 판이 열리고, 어제 못 한 일은 버튼 하나로 가져와요.</p>
+            <div class="tl-tags"><span class="sh">시간 관리</span><span>모든 직장인</span><span class="sh">보드·목록</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article><article class="tl-tile" id="routine-checklist" data-tool="routine-checklist" data-scene="time" data-who="ga acct shop" data-shape="board" data-text="반복 업무 체크리스트 매일·매주·매월 하는 일을 한 번만 등록하면 오늘 할 것만 골라 보여 줘요. 체크하면 다음 주기에 다시 나타나고, 놓친 일은 「밀림」으로 며칠째인지 알려 줘요. 반복 업무 체크리스트 정기 업무 루틴 매일 매주 매월 말일 월말 마감 점검 누락 방지 밀린 일 총무 회계 사장님 가게 오픈 마감 할 일 자동 반복 시간 관리 보드·목록 총무 회계 사장님(가게)">
+        <a class="tl-tile-a" href="/tools/routine-checklist/">
+          <span class="tl-tile-pv"><img src="/tools/previews/routine-checklist.jpg" alt="반복 업무 체크리스트 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">반복 업무 체크리스트</h3>
+            <p class="tl-desc">매일·매주·매월 하는 일을 한 번만 등록하면 오늘 할 것만 골라 보여 줘요. 체크하면 다음 주기에 다시 나타나고, 놓친 일은 「밀림」으로 며칠째인지 알려 줘요.</p>
+            <div class="tl-tags"><span class="sh">시간 관리</span><span>총무</span><span>회계</span><span>사장님(가게)</span><span class="sh">보드·목록</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article><article class="tl-tile" id="kanban-board" data-tool="kanban-board" data-scene="progress" data-who="all lead" data-shape="board" data-text="칸반 보드 할 일 · 하는 중 · 끝남 세 칸에 카드를 놓고 버튼으로 옆 칸에 옮기며 일이 어디까지 왔는지 한눈에 봐요. 카드마다 그 칸에 온 날이, 맨 위엔 전체 진행률이 보여요. 칸반 보드 칸반보드 할 일 할일 목록 하는 중 진행 중 끝남 완료 진행 상황 진행률 업무 현황판 업무 보드 업무 관리 프로젝트 관리 팀 업무 공유 행사 준비 투두 막힌 일 마감 관리 담당자 반복 업무 주간 보고 진행 관리 보드·목록 모든 직장인 팀장">
+        <a class="tl-tile-a" href="/tools/kanban-board/">
+          <span class="tl-tile-pv"><img src="/tools/previews/kanban-board.jpg" alt="칸반 보드 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">칸반 보드</h3>
+            <p class="tl-desc">할 일 · 하는 중 · 끝남 세 칸에 카드를 놓고 버튼으로 옆 칸에 옮기며 일이 어디까지 왔는지 한눈에 봐요. 카드마다 그 칸에 온 날이, 맨 위엔 전체 진행률이 보여요.</p>
+            <div class="tl-tags"><span class="sh">진행 관리</span><span>모든 직장인</span><span>팀장</span><span class="sh">보드·목록</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article><article class="tl-tile" id="deadline-countdown" data-tool="deadline-countdown" data-scene="time" data-who="all lead" data-shape="timer" data-text="마감 카운트다운 판 마감 이름과 날짜를 넣으면 「D-3」처럼 남은 날 순서로 줄을 세워요. 오늘·내일 마감은 노란색, 지난 마감은 빨간색으로 보이고, 끝낸 일은 체크하면 아래로 내려가요. 마감 카운트다운 디데이 D-day D데이 남은 날 마감일 기한 제출 기한 납기 납품 일정 할 일 마감 관리 마감 알림 보고서 제출 신청 마감 정산 마감 팀장 총무 시간 관리 타이머 모든 직장인 팀장">
+        <a class="tl-tile-a" href="/tools/deadline-countdown/">
+          <span class="tl-tile-pv"><img src="/tools/previews/deadline-countdown.jpg" alt="마감 카운트다운 판 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">마감 카운트다운 판</h3>
+            <p class="tl-desc">마감 이름과 날짜를 넣으면 「D-3」처럼 남은 날 순서로 줄을 세워요. 오늘·내일 마감은 노란색, 지난 마감은 빨간색으로 보이고, 끝낸 일은 체크하면 아래로 내려가요.</p>
+            <div class="tl-tags"><span class="sh">시간 관리</span><span>모든 직장인</span><span>팀장</span><span class="sh">타이머</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article><article class="tl-tile" id="focus-timer" data-tool="focus-timer" data-scene="time" data-who="all" data-shape="timer" data-text="집중 타이머 25분 집중하고 5분 쉬는 「뽀모도로」 타이머예요. 끝나면 화면과 소리로 알려 주고, 오늘 몇 번·몇 분 집중했는지 내 브라우저에 쌓아 줘요. 집중 타이머 뽀모도로 포모도로 25분 집중 5분 휴식 몰입 딥워크 공부 타이머 업무 집중 집중력 시간 관리 재택근무 보고서 작성 방해 금지 집중 근무 시간 시간 관리 타이머 모든 직장인">
+        <a class="tl-tile-a" href="/tools/focus-timer/">
+          <span class="tl-tile-pv"><img src="/tools/previews/focus-timer.jpg" alt="집중 타이머 화면 미리보기" width="878" height="560" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">집중 타이머</h3>
+            <p class="tl-desc">25분 집중하고 5분 쉬는 「뽀모도로」 타이머예요. 끝나면 화면과 소리로 알려 주고, 오늘 몇 번·몇 분 집중했는지 내 브라우저에 쌓아 줘요.</p>
+            <div class="tl-tags"><span class="sh">시간 관리</span><span>모든 직장인</span><span class="sh">타이머</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article><article class="tl-tile" id="contract-expiry" data-tool="contract-expiry" data-scene="progress" data-who="ga acct shop" data-shape="board" data-text="계약 만기 알림판 임대·렌탈·구독·보험 계약을 만기 가까운 순으로 모아 D-숫자로 보여 줘요. 만기보다 먼저 오는 「해지 통보 마감일」을 따로 강조하고, 월 금액 합계와 「갱신함」 한 번으로 다음 만기까지 챙겨요. 계약 만기 알림 계약 만료 계약 관리 계약 대장 만기일 만료일 종료일 D-day 디데이 해지 통보 해지 예고 자동 갱신 자동 연장 재계약 갱신 렌탈 리스 복합기 정수기 구독 소프트웨어 구독료 프로그램 사용료 보험 만기 화재보험 자동차보험 임대차 월세 사무실 임대 가게 임대 유지보수 계약 호스팅 도메인 월 고정비 고정 비용 합계 총무 회계 사장님 엑셀 붙여넣기 CSV 내보내기 위약금 보증금 자동이체 법인카드 결제 해지 방법 서면 통보 내용증명 고정비 절감 계약 기간 진행 관리 보드·목록 총무 회계 사장님(가게)">
+        <a class="tl-tile-a" href="/tools/contract-expiry/">
+          <span class="tl-tile-pv"><img src="/tools/previews/contract-expiry.jpg" alt="계약 만기 알림판 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">계약 만기 알림판</h3>
+            <p class="tl-desc">임대·렌탈·구독·보험 계약을 만기 가까운 순으로 모아 D-숫자로 보여 줘요. 만기보다 먼저 오는 「해지 통보 마감일」을 따로 강조하고, 월 금액 합계와 「갱신함」 한 번으로 다음 만기까지 챙겨요.</p>
+            <div class="tl-tags"><span class="sh">진행 관리</span><span>총무</span><span>회계</span><span>사장님(가게)</span><span class="sh">보드·목록</span><span class="xl">엑셀 연결</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article><article class="tl-tile" id="world-clock" data-tool="world-clock" data-scene="time" data-who="sales" data-shape="calc" data-text="해외 시간 변환기 거래처가 있는 도시를 더해 두면 그곳의 지금 시각이 보이고, 시간 막대나 시각 칸으로 「서울 오후 3시」를 고르면 모든 도시 시각이 같이 바뀌어요. 근무 시간이 겹치는 때와 서머타임도 알아서 맞춰 보여 줘요. 해외 시간 세계 시간 시차 계산 시차 변환 세계 시계 시간대 타임존 서머타임 해외 거래처 해외 영업 무역 화상 회의 시간 잡기 미국 시간 유럽 시간 베트남 시간 근무 시간 겹침 출장 시간 관리 계산기 영업">
+        <a class="tl-tile-a" href="/tools/world-clock/">
+          <span class="tl-tile-pv"><img src="/tools/previews/world-clock.jpg" alt="해외 시간 변환기 화면 미리보기" width="878" height="560" loading="lazy" decoding="async"></span>
+          <div class="tl-tile-b">
+            <h3 class="tl-name">해외 시간 변환기</h3>
+            <p class="tl-desc">거래처가 있는 도시를 더해 두면 그곳의 지금 시각이 보이고, 시간 막대나 시각 칸으로 「서울 오후 3시」를 고르면 모든 도시 시각이 같이 바뀌어요. 근무 시간이 겹치는 때와 서머타임도 알아서 맞춰 보여 줘요.</p>
+            <div class="tl-tags"><span class="sh">시간 관리</span><span>영업</span><span class="sh">계산기</span></div>
+            <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
+          </div>
+        </a>
+      </article></div></section></div>
+
+  
+  </div>
+
+  
+</div>
+
+<!--NDFB:START-->
+<!-- ════════════════════════════════════════════════════════════════════════
+   _track-and-feedback.html — 전 페이지 </body> 직전 주입(build.mjs)  [v2 · 2026-08-04]
+   ① 방문 행동 추적: pageview(+utm) · term_click · scroll(완독 이정표) · leave(체류) ·
+      quiz(OX 정오) · copy(실습 복사) · faq(펼침) · outbound(전환 클릭)  → Firestore 익명 append
+      + 익명 번호표 vid(브라우저)·sid(세션) — 개인정보 아님(무작위 난수).
+   ② 로그인 없는 비공개 의견함: 별점(선택)+의견/질문+답장 이메일(선택) → Firestore 익명 create
+   ③ 다운로드본 안내 배너: file:// 또는 비공식 호스트에서 열리면 출처 안내(온라인에선 미표시)
+   설계: SDK 미로드(REST createDocument 1발), 자급자족 스타일/스크립트(어느 페이지서든 동작).
+   값(토큰)은 빌드 시 catalog.json의 analytics 블록으로 치환. gaMeasurementId 비우면 GA 블록 자동 제거.
+   ⚠️ localhost(미리보기)에서는 기록하지 않음. file://(다운로드본)은 기록 유지 — 유통 측정용.
+   ════════════════════════════════════════════════════════════════════════ -->
+<!-- GA4 미설정(catalog.analytics.gaMeasurementId 비어있음) — gtag 생략, Firestore 추적만 -->
+
+<style>
+  #ndfb-btn{position:fixed;right:16px;bottom:16px;z-index:2147482000;display:inline-flex;align-items:center;gap:7px;
+    background:#2563EB;color:#fff;font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    font-weight:800;font-size:14px;line-height:1;border:0;cursor:pointer;padding:12px 16px;border-radius:999px;
+    box-shadow:0 4px 18px rgba(37,99,235,.38);transition:transform .12s ease,box-shadow .12s ease;}
+  #ndfb-btn:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(37,99,235,.46);}
+  #ndfb-ov{position:fixed;inset:0;z-index:2147482001;display:none;align-items:center;justify-content:center;
+    background:rgba(17,20,28,.52);backdrop-filter:blur(2px);padding:18px;
+    font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;}
+  #ndfb-ov.on{display:flex;}
+  #ndfb-card{width:100%;max-width:420px;max-height:92vh;overflow:auto;background:#fff;color:#1A1A1A;border-radius:18px;padding:24px 22px 20px;
+    box-shadow:0 18px 60px rgba(0,0,0,.3);position:relative;}
+  #ndfb-card h3{margin:0 0 4px;font-size:19px;font-weight:900;color:#111827;}
+  #ndfb-card .ndfb-sub{margin:0 0 14px;font-size:13.5px;color:#5B6472;line-height:1.5;}
+  #ndfb-x{position:absolute;top:12px;right:14px;background:none;border:0;font-size:22px;line-height:1;color:#9AA2AE;cursor:pointer;padding:4px;}
+  .ndfb-lab{display:block;font-size:13px;font-weight:800;color:#374151;margin:0 0 8px;}
+  #ndfb-kind{display:flex;gap:8px;margin:0 0 14px;}
+  #ndfb-kind button{flex:1;background:#F4F6FA;border:1.5px solid #E2E5EA;border-radius:11px;padding:10px 8px;cursor:pointer;
+    font-family:inherit;font-size:14px;font-weight:800;color:#4B5563;transition:all .1s;}
+  #ndfb-kind button.on{background:#EAF1FB;border-color:#2563EB;color:#1C5CAB;}
+  #ndfb-stars{display:flex;gap:4px;margin:0 0 4px;}
+  #ndfb-stars button{background:none;border:0;cursor:pointer;font-size:30px;line-height:1;padding:2px;color:#D7DBE2;transition:color .1s,transform .1s;}
+  #ndfb-stars button:hover{transform:scale(1.12);}
+  #ndfb-stars button.on{color:#F5A623;}
+  .ndfb-opt{font-size:11.5px;color:#9AA2AE;margin:0 0 12px;}
+  #ndfb-text{width:100%;box-sizing:border-box;min-height:90px;resize:vertical;border:1.5px solid #E2E5EA;border-radius:12px;
+    padding:11px 13px;font-size:15px;line-height:1.55;font-family:inherit;color:#1A1A1A;background:#FBFBFC;}
+  #ndfb-text:focus{outline:none;border-color:#2563EB;background:#fff;}
+  #ndfb-contact{width:100%;box-sizing:border-box;border:1.5px solid #E2E5EA;border-radius:12px;margin-top:10px;
+    padding:10px 13px;font-size:14px;font-family:inherit;color:#1A1A1A;background:#FBFBFC;}
+  #ndfb-contact:focus{outline:none;border-color:#2563EB;background:#fff;}
+  .ndfb-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;}
+  #ndfb-send{width:100%;margin-top:14px;background:#2563EB;color:#fff;border:0;cursor:pointer;font-weight:800;font-size:15px;
+    padding:13px;border-radius:12px;transition:background .12s;font-family:inherit;}
+  #ndfb-send:hover{background:#1D4ED8;}
+  #ndfb-send:disabled{background:#9CB4EE;cursor:default;}
+  #ndfb-note{margin:12px 0 0;font-size:11.5px;color:#9AA2AE;line-height:1.5;text-align:center;}
+  #ndfb-done{display:none;text-align:center;padding:14px 0 4px;}
+  #ndfb-done .ndfb-big{font-size:40px;line-height:1;margin-bottom:10px;}
+  #ndfb-done p{margin:0;font-size:15px;font-weight:700;color:#111827;}
+  #ndfb-err{display:none;margin-top:10px;font-size:13px;color:#DC2626;font-weight:700;text-align:center;}
+  #ndfb-origin{position:fixed;top:0;left:0;right:0;z-index:2147482100;background:#12294F;color:#fff;
+    font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    font-size:13px;line-height:1.5;padding:10px 44px 10px 14px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.25);}
+  #ndfb-origin a{color:#FFD977;font-weight:800;}
+  #ndfb-origin button{position:absolute;right:8px;top:6px;background:none;border:0;color:#9FB3D1;font-size:18px;cursor:pointer;padding:4px;}
+  @media (max-width:480px){ #ndfb-btn{font-size:13px;padding:11px 14px;} }
+  /* ── 읽기 끝 인라인 별점 카드 ── */
+  #ndfb-c2{ margin:34px auto 22px; width:min(560px, calc(100% - 32px)); background:#fff; color:#1A1A1A;
+    border:1.5px solid #E2E5EA; border-radius:16px; padding:20px 18px 16px; text-align:center;
+    font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    box-shadow:0 6px 24px rgba(17,20,28,.06); }
+  #ndfb-c2.c2-end{ margin:34px auto 96px; }
+  #ndfb-c2 .c2-q{ margin:0 0 10px; font-size:15.5px; font-weight:800; color:#111827; }
+  #ndfb-c2 .c2-stars{ display:flex; justify-content:center; gap:6px; }
+  #ndfb-c2 .c2-stars button{ background:none; border:0; cursor:pointer; font-size:34px; line-height:1; padding:2px 3px;
+    color:#D7DBE2; transition:color .1s, transform .1s; }
+  #ndfb-c2 .c2-stars button:hover{ transform:scale(1.15); color:#F5C56A; }
+  #ndfb-c2 .c2-stars button.on{ color:#F5A623; }
+  #ndfb-c2 .c2-hint{ margin:8px 0 0; font-size:12px; color:#9AA2AE; }
+  #ndfb-c2 .c2-err{ display:none; margin:8px 0 0; font-size:13px; color:#DC2626; font-weight:700; }
+  #ndfb-c2 .c2-done{ display:none; margin:6px 0 2px; font-size:14.5px; font-weight:800; color:#111827; }
+  #ndfb-c2 .c2-done .c2-more{ background:none; border:0; cursor:pointer; color:#2563EB; font-weight:800;
+    font-size:13.5px; text-decoration:underline; text-underline-offset:3px; padding:2px 4px; font-family:inherit; }
+  #ndfb-c2.busy{ opacity:.55; pointer-events:none; }
+  #ndfb-c2.rated .c2-stars, #ndfb-c2.rated .c2-hint{ display:none; }
+  #ndfb-c2.rated .c2-done{ display:block; }
+  /* ── 75% 지점 플로팅 버튼 넛지 ── */
+  @keyframes ndfb-pulse{ 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.07);} }
+  #ndfb-btn.ndfb-nudge{ animation:ndfb-pulse 1.15s ease-in-out 3; }
+  @media (prefers-reduced-motion: reduce){ #ndfb-btn.ndfb-nudge{ animation:none; } }
+</style>
+
+
+
+
+
+
+<!--NDFB:END-->
+<!--NDSTORY:START-->
+<!-- 「사연 보내기」 상시 버튼 + 한 번 뜨는 팝업 (수익화 3차 P8·P9, 2026-10-02).
+     링크는 /story (firebase.json 302 → 강의 신청 포털 설문 tool-story). 폼을 옮기면 firebase.json 한 곳만 바꾼다.
+     팝업: 25초 뒤 또는 60% 스크롤(8초 지난 뒤) 한 번 · 본 뒤 14일 동안 다시 안 뜸 · 저장소가 막히면 아예 안 띄움 ·
+     글 쓰는 중·전체 화면·의견함이 열려 있으면 미룸. 빌드 9.6 단계가 /me 를 뺀 공개 페이지에 넣는다(마커로 멱등).
+     z-index 는 질문·의견 버튼(2147482000)과 같게 — 이 조각이 뒤에 들어가 위에 그려지고, 의견함 창(…001)보다는 아래. -->
+<style>
+  #ndst-btn{position:fixed;right:16px;bottom:66px;z-index:2147481990;display:inline-flex;align-items:center;gap:6px;
+    background:#fff;color:#1D4ED8;border:1.5px solid #BFD0F7;text-decoration:none;
+    font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;font-weight:800;font-size:13.5px;line-height:1;
+    padding:10px 14px;border-radius:999px;box-shadow:0 3px 12px rgba(17,24,39,.12);}
+  #ndst-btn:hover{border-color:#2563EB;}
+  #ndst-btn:focus-visible,#ndst-go:focus-visible,#ndst-later:focus-visible,#ndst-x:focus-visible{outline:3px solid #93B4F5;outline-offset:2px;}
+  #ndst-pop{position:fixed;right:16px;bottom:116px;z-index:2147482000;width:min(340px,calc(100vw - 32px));box-sizing:border-box;
+    background:#fff;color:#1A1A1A;border:1px solid #E3E6EC;border-radius:16px;box-shadow:0 10px 32px rgba(17,24,39,.18);padding:16px 16px 14px;
+    font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;word-break:keep-all;}
+  #ndst-pop[hidden]{display:none !important;}
+  #ndst-pop .ndst-h{margin:0 30px 6px 0;font-size:16px;font-weight:900;letter-spacing:-.02em;line-height:1.35;}
+  #ndst-pop .ndst-p{margin:0 0 12px;font-size:14px;line-height:1.6;color:#4B5563;}
+  #ndst-pop .ndst-r{display:flex;gap:8px;flex-wrap:wrap;}
+  #ndst-go{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border-radius:12px;
+    background:#2563EB;color:#fff;font-weight:800;font-size:14.5px;text-decoration:none;}
+  #ndst-later{min-height:44px;padding:0 14px;border-radius:12px;background:#F3F4F6;color:#374151;border:0;font:inherit;font-weight:700;font-size:14px;cursor:pointer;}
+  #ndst-x{position:absolute;top:6px;right:6px;width:40px;height:40px;border:0;background:none;color:#9AA2AE;font-size:20px;line-height:1;cursor:pointer;border-radius:10px;}
+  @media (max-width:560px){
+    #ndst-btn{right:12px;bottom:64px;padding:9px 12px;font-size:13px;}
+    #ndst-pop{left:12px;right:12px;bottom:110px;width:auto;}   /* 두 떠 있는 버튼 위 — 버튼을 가리지 않고, 버튼에 가려지지도 않게 */
+  }
+  @media (prefers-reduced-motion:no-preference){
+    #ndst-pop{animation:ndstIn .25s ease-out;}
+    @keyframes ndstIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  }
+  @media print{#ndst-btn,#ndst-pop{display:none !important;}}
+</style>
+
+
+
+<!--NDSTORY:END-->
+
+
+</body></html>
