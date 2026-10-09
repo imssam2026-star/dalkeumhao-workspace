@@ -420,6 +420,118 @@ a.lb-ls:hover{ border-color:var(--fg); }
   .lb-card{ padding:16px; }
   .lb-num{ font-size:28px; }
 }
+
+/* ===== SmartStore Calculator Modal styles ===== */
+.sf-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease-in-out;
+}
+.sf-modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sf-modal-content {
+  background: var(--card, #fff);
+  color: #24324a;
+  width: 90%;
+  max-width: 900px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  box-shadow: 0 10px 45px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  position: relative;
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s;
+}
+.sf-modal-backdrop.active .sf-modal-content {
+  transform: translateY(0) scale(1);
+}
+.sf-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #f1f3f7;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #687488;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+  z-index: 10;
+}
+.sf-modal-close:hover {
+  background: #e4e7ee;
+  color: #1a1a1a;
+}
+.cfee { color: #24324a; }
+.cfee-heading { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; margin-bottom: 24px; }
+.cfee h2 { font-size: 24px; margin: 10px 0; }
+.cfee-heading p { margin: 0; color: #687488; }
+.cfee-examples { display: flex; gap: 8px; flex-wrap: wrap; }
+.cfee-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .85fr); gap: 32px; }
+.cfee form > label, .cfee-fields > label { display: block; font-weight: 600; font-size: 14px; margin: 16px 0 7px; }
+.cfee input:not([type=radio]), .cfee select { display: block; box-sizing: border-box; width: 100%; min-width: 0; border: 1px solid #d9dfeb; border-radius: 9px; padding: 11px 12px; font: inherit; color: #24324a; background: #fff; }
+.cfee input:focus, .cfee select:focus { outline: 2px solid #7960df; outline-offset: 2px; }
+.cfee-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.cfee-fields input { margin-top: 7px; }
+.cfee-modes { border: 0; padding: 0; display: flex; gap: 18px; flex-wrap: wrap; }
+.cfee-modes legend { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.cfee-modes label { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+.cfee input[type=radio] { accent-color: #6550d8; }
+.cfee .muted, .cfee-category-note { font-size: 12px; color: #687488; line-height: 1.7; }
+.cfee-category-note { min-height: 20px; overflow-wrap: anywhere; }
+.cfee-output { min-width: 0; }
+.cfee-profit { padding: 26px; border-radius: 16px; background: #f0edff; display: flex; flex-direction: column; gap: 12px; color: #5035bb; }
+.cfee-profit > strong { font-size: 36px; line-height: 1.2; overflow-wrap: anywhere; }
+.cfee-profit.is-loss { background: #fff0f0; color: #b52e3b; }
+.cfee-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0 24px; }
+.cfee-stats > div { border: 1px solid #e4e7ee; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.cfee-stats span { font-size: 13px; color: #687488; }
+.cfee-stats strong { font-size: 20px; overflow-wrap: anywhere; }
+.cfee h3 { font-size: 16px; }
+.cfee-breakdown { margin: 0; }
+.cfee-breakdown > div { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid #edf0f5; font-size: 14px; }
+.cfee-breakdown dd { margin: 0; text-align: right; }
+.cfee-notes { background: #f8f9fc; border-radius: 12px; padding: 16px 20px; margin-top: 20px; font-size: 13px; line-height: 1.8; color: #566277; }
+.cfee-notes h3 { margin: 0; }
+.cfee-formula { font-size: 13px; line-height: 1.8; margin-top: 20px; }
+.cfee #cf-error { background: #fff0f0; color: #a12d37; padding: 18px; border-radius: 12px; line-height: 1.8; }
+.cfee [hidden] { display: none !important; }
+@media (max-width: 980px) {
+  .cfee-layout { grid-template-columns: 1fr; }
+  .cfee-heading { flex-direction: column; }
+}
+@media (max-width: 480px) {
+  .cfee-fields { grid-template-columns: 1fr; }
+  .cfee-profit > strong { font-size: 30px; }
+  .cfee-stats strong { font-size: 18px; }
+}
+.sfee #sf-connect-rate-wrap { margin-top: 16px; }
+.sfee #sf-connect-rate-wrap label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 7px; }
+.sfee #sf-error { background: #fff0f0; color: #a12d37; padding: 18px; border-radius: 12px; line-height: 1.8; }
+.sfee .cfee-output { align-self: start; }
+.sfee .cfee-profit:not(.is-loss) { background: #e9f8f0; color: #087448; }
+
 </style>
 <style>/* 업무 도구 주문 사전 — 페이지(tl-) + 앱 공통(ndt-) 스타일. 앱별 규칙은 apps/<id>.css 에서 [data-app="<id>"] 아래로만. */
 /* hidden 속성은 언제나 숨김 (display 규칙이 이기지 못하게 — 10/1 공개본에서 빈 글상자가 보이던 원인) */
@@ -841,7 +953,7 @@ html.ndt-big-open{ overflow:hidden; }
             <span class="tl-open" aria-hidden="true">열어서 쓰기 →</span>
           </div>
         </a>
-      </article></div></section><section class="tl-sec kd-sec" id="k0"><h2 class="tl-sh">마켓 수수료·마진 계산 <small>판매 전 수수료와 남는 돈을 확인할 때 · 7개</small></h2><div class="kd-grid"><a class="kd-chip" href="https://tools.kdpmkt.com/smartstore-fees/" target="_blank" rel="noopener" data-text="스마트스토어 수수료 사업자별 수수료와 이익"><b>스마트스토어 수수료</b><span>사업자별 수수료와 이익</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/coupang-fees/" target="_blank" rel="noopener" data-text="쿠팡 수수료 카테고리 요율·이익률"><b>쿠팡 수수료</b><span>카테고리 요율·이익률</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/rocket-growth-margin/" target="_blank" rel="noopener" data-text="쿠팡 로켓그로스 마진율 상품 1개 마진 (VAT 포함)"><b>쿠팡 로켓그로스 마진율</b><span>상품 1개 마진 (VAT 포함)</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/rocket-growth-policy/" target="_blank" rel="noopener" data-text="쿠팡 로켓그로스 정책 공식 비용·세이버 혜택"><b>쿠팡 로켓그로스 정책</b><span>공식 비용·세이버 혜택</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/gmarket-fees/" target="_blank" rel="noopener" data-text="지마켓 수수료 주문·월 이익 계산"><b>지마켓 수수료</b><span>주문·월 이익 계산</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/auction-fees/" target="_blank" rel="noopener" data-text="옥션 수수료 주문·월 이익 계산"><b>옥션 수수료</b><span>주문·월 이익 계산</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/11st-fees/" target="_blank" rel="noopener" data-text="11번가 수수료 쿠폰·제휴료 구분 계산"><b>11번가 수수료</b><span>쿠폰·제휴료 구분 계산</span></a></div></section><section class="tl-sec kd-sec" id="k1"><h2 class="tl-sh">상품 이미지 작업 <small>상세페이지·썸네일을 만들 때 · 6개</small></h2><div class="kd-grid"><a class="kd-chip" href="https://tools.kdpmkt.com/image/" target="_blank" rel="noopener" data-text="이미지 편집 크기·워터마크 한 번에"><b>이미지 편집</b><span>크기·워터마크 한 번에</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/background/" target="_blank" rel="noopener" data-text="배경 제거·바꾸기 피사체만 남기고 배경 교체"><b>배경 제거·바꾸기</b><span>피사체만 남기고 배경 교체</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/split/" target="_blank" rel="noopener" data-text="사진 분할 2·4·8·16분할"><b>사진 분할</b><span>2·4·8·16분할</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/template/" target="_blank" rel="noopener" data-text="템플릿 캔버스 이미지·영상으로 내보내기"><b>템플릿 캔버스</b><span>이미지·영상으로 내보내기</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/mosaic/" target="_blank" rel="noopener" data-text="사진 모자이크 가리고 싶은 부분만"><b>사진 모자이크</b><span>가리고 싶은 부분만</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/gif/" target="_blank" rel="noopener" data-text="영상 → GIF 움직이는 이미지 만들기"><b>영상 → GIF</b><span>움직이는 이미지 만들기</span></a></div></section><section class="tl-sec kd-sec" id="k2"><h2 class="tl-sh">운영 보조 <small>발송·정리·기록할 때 · 6개</small></h2><div class="kd-grid"><a class="kd-chip" href="https://tools.kdpmkt.com/labelmate/" target="_blank" rel="noopener" data-text="A4 라벨메이트 엑셀 붙여넣기, 23종 라벨 출력"><b>A4 라벨메이트</b><span>엑셀 붙여넣기, 23종 라벨 출력</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/capture/" target="_blank" rel="noopener" data-text="웹페이지 전체 캡처 경쟁 상품 페이지 저장"><b>웹페이지 전체 캡처</b><span>경쟁 상품 페이지 저장</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/rename/" target="_blank" rel="noopener" data-text="파일명 일괄 변경 이미지 이름·번호 정리"><b>파일명 일괄 변경</b><span>이미지 이름·번호 정리</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/qr/" target="_blank" rel="noopener" data-text="QR 코드 생성 스토어 주소를 QR로"><b>QR 코드 생성</b><span>스토어 주소를 QR로</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/pdf-tools/" target="_blank" rel="noopener" data-text="PDF 변환·관리 병합·분할·변환"><b>PDF 변환·관리</b><span>병합·분할·변환</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/blog/" target="_blank" rel="noopener" data-text="블로그 본문 정리 줄바꿈·해시태그 정리"><b>블로그 본문 정리</b><span>줄바꿈·해시태그 정리</span></a></div></section></div>
+      </article></div></section><section class="tl-sec kd-sec" id="k0"><h2 class="tl-sh">마켓 수수료·마진 계산 <small>판매 전 수수료와 남는 돈을 확인할 때 · 7개</small></h2><div class="kd-grid"><a class="kd-chip" href="javascript:void(0)" id="sf-chip" data-text="스마트스토어 수수료 사업자별 수수료와 이익"><b>스마트스토어 수수료</b><span>사업자별 수수료와 이익</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/coupang-fees/" target="_blank" rel="noopener" data-text="쿠팡 수수료 카테고리 요율·이익률"><b>쿠팡 수수료</b><span>카테고리 요율·이익률</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/rocket-growth-margin/" target="_blank" rel="noopener" data-text="쿠팡 로켓그로스 마진율 상품 1개 마진 (VAT 포함)"><b>쿠팡 로켓그로스 마진율</b><span>상품 1개 마진 (VAT 포함)</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/rocket-growth-policy/" target="_blank" rel="noopener" data-text="쿠팡 로켓그로스 정책 공식 비용·세이버 혜택"><b>쿠팡 로켓그로스 정책</b><span>공식 비용·세이버 혜택</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/gmarket-fees/" target="_blank" rel="noopener" data-text="지마켓 수수료 주문·월 이익 계산"><b>지마켓 수수료</b><span>주문·월 이익 계산</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/auction-fees/" target="_blank" rel="noopener" data-text="옥션 수수료 주문·월 이익 계산"><b>옥션 수수료</b><span>주문·월 이익 계산</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/11st-fees/" target="_blank" rel="noopener" data-text="11번가 수수료 쿠폰·제휴료 구분 계산"><b>11번가 수수료</b><span>쿠폰·제휴료 구분 계산</span></a></div></section><section class="tl-sec kd-sec" id="k1"><h2 class="tl-sh">상품 이미지 작업 <small>상세페이지·썸네일을 만들 때 · 6개</small></h2><div class="kd-grid"><a class="kd-chip" href="https://tools.kdpmkt.com/image/" target="_blank" rel="noopener" data-text="이미지 편집 크기·워터마크 한 번에"><b>이미지 편집</b><span>크기·워터마크 한 번에</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/background/" target="_blank" rel="noopener" data-text="배경 제거·바꾸기 피사체만 남기고 배경 교체"><b>배경 제거·바꾸기</b><span>피사체만 남기고 배경 교체</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/split/" target="_blank" rel="noopener" data-text="사진 분할 2·4·8·16분할"><b>사진 분할</b><span>2·4·8·16분할</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/template/" target="_blank" rel="noopener" data-text="템플릿 캔버스 이미지·영상으로 내보내기"><b>템플릿 캔버스</b><span>이미지·영상으로 내보내기</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/mosaic/" target="_blank" rel="noopener" data-text="사진 모자이크 가리고 싶은 부분만"><b>사진 모자이크</b><span>가리고 싶은 부분만</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/gif/" target="_blank" rel="noopener" data-text="영상 → GIF 움직이는 이미지 만들기"><b>영상 → GIF</b><span>움직이는 이미지 만들기</span></a></div></section><section class="tl-sec kd-sec" id="k2"><h2 class="tl-sh">운영 보조 <small>발송·정리·기록할 때 · 6개</small></h2><div class="kd-grid"><a class="kd-chip" href="https://tools.kdpmkt.com/labelmate/" target="_blank" rel="noopener" data-text="A4 라벨메이트 엑셀 붙여넣기, 23종 라벨 출력"><b>A4 라벨메이트</b><span>엑셀 붙여넣기, 23종 라벨 출력</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/capture/" target="_blank" rel="noopener" data-text="웹페이지 전체 캡처 경쟁 상품 페이지 저장"><b>웹페이지 전체 캡처</b><span>경쟁 상품 페이지 저장</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/rename/" target="_blank" rel="noopener" data-text="파일명 일괄 변경 이미지 이름·번호 정리"><b>파일명 일괄 변경</b><span>이미지 이름·번호 정리</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/qr/" target="_blank" rel="noopener" data-text="QR 코드 생성 스토어 주소를 QR로"><b>QR 코드 생성</b><span>스토어 주소를 QR로</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/pdf-tools/" target="_blank" rel="noopener" data-text="PDF 변환·관리 병합·분할·변환"><b>PDF 변환·관리</b><span>병합·분할·변환</span></a><a class="kd-chip" href="https://tools.kdpmkt.com/blog/" target="_blank" rel="noopener" data-text="블로그 본문 정리 줄바꿈·해시태그 정리"><b>블로그 본문 정리</b><span>줄바꿈·해시태그 정리</span></a></div></section></div>
 
   
   </div>
@@ -851,7 +963,296 @@ html.ndt-big-open{ overflow:hidden; }
 
 <!--NDFB:START-->
 <!-- ════════════════════════════════════════════════════════════════════════
-   _track-and-feedback.html — 전 페이지 </body> 직전 주입(build.mjs)  [v2 · 2026-08-04]
+   _track-and-feedback.html — 전 페이지 
+<!-- SmartStore Fee Calculator Modal -->
+<div class="sf-modal-backdrop" id="sfModal">
+  <div class="sf-modal-content">
+    <button class="sf-modal-close" id="sfModalClose" aria-label="닫기">&times;</button>
+    <div class="cfee sfee">
+      <div class="cfee-heading">
+        <div>
+          <span class="attrib" style="margin-top: 0; margin-bottom: 8px;">사업자별 요율 · 원 단위 버림</span>
+          <h2 style="font-weight: 800; font-size: 24px; margin: 10px 0; color: #24324a;">스마트스토어 수수료 계산기</h2>
+          <p style="margin: 0; color: #687488; font-size: 14px;">사업자 등급과 판매 조건을 선택하고, 수수료를 뺀 이익을 확인하세요.</p>
+        </div>
+        <div class="cfee-examples">
+          <button type="button" id="sf-paid-example" style="font-family: inherit; font-weight: bold; background: #6550d8; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px;">유료배송 예시</button>
+          <button type="button" id="sf-free-example" style="font-family: inherit; font-weight: bold; background: #edf0f5; color: #24324a; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px;">무료배송 예시</button>
+        </div>
+      </div>
+      <div class="cfee-layout">
+        <form id="sf-form" novalidate style="margin: 0;">
+          <fieldset class="cfee-modes">
+            <legend>배송 방식</legend>
+            <label><input type="radio" name="sf-mode" value="paid" checked> 유료배송</label>
+            <label><input type="radio" name="sf-mode" value="free"> 무료배송</label>
+          </fieldset>
+          <div class="cfee-fields">
+            <label>판매가 (원)<input id="sf-sale" type="number" min="1" step="any" required inputmode="decimal" value="47800"></label>
+            <label>상품 원가 (원)<input id="sf-cost" type="number" min="0" step="any" required inputmode="decimal" value="40000"></label>
+          </div>
+          <label for="sf-shipping" id="sf-shipping-label" style="display:block; font-weight:600; font-size:14px; margin:16px 0 7px;">고객에게 받는 배송비 (원)</label>
+          <input id="sf-shipping" type="number" min="0" step="any" required inputmode="decimal" value="3000">
+          
+          <label for="sf-business" style="display:block; font-weight:600; font-size:14px; margin:16px 0 7px;">사업자 등급</label>
+          <select id="sf-business">
+            <option value="micro" selected>영세</option>
+            <option value="small1">중소1</option>
+            <option value="small2">중소2</option>
+            <option value="small3">중소3</option>
+            <option value="standard">일반</option>
+          </select>
+          
+          <label for="sf-base-rate" style="display:block; font-weight:600; font-size:14px; margin:16px 0 7px;">기본 수수료율 (VAT 포함, %)</label>
+          <input id="sf-base-rate" type="number" min="0" max="100" step="0.000001" required inputmode="decimal" value="1.947">
+          
+          <label for="sf-marketing" style="display:block; font-weight:600; font-size:14px; margin:16px 0 7px;">판매자 마케팅 여부</label>
+          <select id="sf-marketing">
+            <option value="yes" selected>Y · 적용</option>
+            <option value="no">N · 미적용</option>
+          </select>
+          
+          <label for="sf-selling-rate" style="display:block; font-weight:600; font-size:14px; margin:16px 0 7px;">판매 수수료율 (VAT 포함, %)</label>
+          <input id="sf-selling-rate" type="number" min="0" max="100" step="0.000001" required inputmode="decimal" value="1">
+          
+          <label for="sf-connect" style="display:block; font-weight:600; font-size:14px; margin:16px 0 7px;">쇼핑커넥트</label>
+          <select id="sf-connect">
+            <option value="yes" selected>Y · 적용</option>
+            <option value="no">N · 미적용</option>
+          </select>
+          
+          <div id="sf-connect-rate-wrap">
+            <label for="sf-connect-rate" style="display:block; font-weight:600; font-size:14px; margin:16px 0 7px;">쇼핑커넥트 수수료율 (VAT 포함, %)</label>
+            <input id="sf-connect-rate" type="number" min="0" max="100" step="0.000001" required inputmode="decimal" value="7.7">
+          </div>
+          
+          <p class="muted" style="margin-top: 12px; font-size: 12px; color: #687488; line-height:1.5;">등급과 적용 여부를 바꾸면 기본 요율로 설정됩니다. 실제 요율이 다르면 직접 수정하세요.</p>
+          <p class="muted" id="sf-rate-note" style="font-weight: bold; margin-top: 4px; font-size: 12px; color: #087448;"></p>
+          <button type="button" id="sf-reset" style="font-family: inherit; width: 100%; font-weight: bold; background: #f2f4f7; color: #24324a; border: 1px solid #d9dfeb; padding: 12px; border-radius: 8px; cursor: pointer; margin-top: 15px; font-size:14px;">입력 초기화</button>
+        </form>
+        <div class="cfee-output">
+          <p id="sf-error" role="alert" hidden></p>
+          <section id="sf-result" aria-live="polite" aria-label="계산 결과">
+            <div class="cfee-profit"><span>예상 이익액</span><strong id="sf-profit"></strong><span id="sf-margin"></span></div>
+            <div class="cfee-stats">
+              <div><span>총 수수료</span><strong id="sf-total-fees"></strong></div>
+              <div><span>총비용</span><strong id="sf-total-cost"></strong></div>
+            </div>
+            <h3 style="font-size: 16px; margin: 20px 0 10px; color: #24324a; font-weight:700;">비용 상세</h3>
+            <dl class="cfee-breakdown" style="padding-left:0;">
+              <div><dt style="font-weight:600; color:#4B5563;">상품 원가</dt><dd id="sf-cost-result" style="font-weight:700; color:#1a1a1a;"></dd></div>
+              <div><dt style="font-weight:600; color:#4B5563;">기본 수수료</dt><dd id="sf-base-fee" style="font-weight:700; color:#1a1a1a;"></dd></div>
+              <div><dt style="font-weight:600; color:#4B5563;">판매 수수료</dt><dd id="sf-selling-fee" style="font-weight:700; color:#1a1a1a;"></dd></div>
+              <div><dt style="font-weight:600; color:#4B5563;">쇼핑커넥트 수수료</dt><dd id="sf-shopping-fee" style="font-weight:700; color:#1a1a1a;"></dd></div>
+              <div><dt style="font-weight:600; color:#4B5563;">배송비 비용 반영</dt><dd id="sf-shipping-cost" style="font-weight:700; color:#1a1a1a;"></dd></div>
+              <div><dt style="font-weight:600; color:#4B5563;">배송비 수수료</dt><dd id="sf-shipping-fee" style="font-weight:700; color:#1a1a1a;"></dd></div>
+            </dl>
+            <p class="cfee-formula" style="font-size: 13px; line-height: 1.8; margin-top: 20px; font-weight:600; color:#4B5563;">이익액 = 판매가 − 총비용</p>
+            <p class="muted" style="font-size: 12px; color: #687488; line-height: 1.5; margin:0;">이익률 = 이익액 ÷ 판매가 × 100</p>
+          </section>
+          <h3 style="font-size: 16px; margin: 24px 0 10px; color: #24324a; font-weight:700;">계산 기준</h3>
+          <p id="sf-assumption" style="font-size: 13px; line-height: 1.6; color: #566277; margin-bottom: 8px;"></p>
+          <p style="font-size: 12px; line-height: 1.6; color: #687488; margin: 4px 0;">각 수수료 금액의 소수점을 먼저 버린 뒤 합산합니다. 금액 입력값과 이익률(%)도 소수점 이하를 0 방향으로 버립니다. 수수료율 자체는 버리지 않습니다.</p>
+          <p style="font-size: 11px; line-height: 1.6; color: #9aa1ac; margin: 4px 0;">예: 7,183.77원 → 7,183원 / −7,183.77원 → −7,183원</p>
+          <p style="font-size: 12px; line-height: 1.6; color: #687488; margin: 4px 0;">사업자 기본 요율은 V3 엑셀 기준이며 판매 수수료는 마케팅 적용 1%, 미적용 3%입니다. 요율은 자동 갱신되지 않으며 광고비·반품비는 별도입니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+/* ===== SmartStore Calculator Modal script ===== */
+(function(){
+  var rates = {micro:1.947,small1:2.563,small2:2.728,small3:3.003,standard:3.63};
+  var marketingRates = {yes:1,no:3};
+  var shoppingRateDefault = 7.7;
+
+  var $ = function(id) { return document.getElementById(id); };
+
+  function truncAmount(v) {
+    if (typeof v !== 'number' || !Number.isFinite(v)) return 0;
+    var n = Math.trunc(v);
+    if (!Number.isSafeInteger(n)) return 0;
+    return n;
+  }
+
+  function mulRate(amount, rate) {
+    if (!Number.isSafeInteger(amount) || typeof rate !== 'number' || !Number.isFinite(rate) || rate < 0 || rate > 100) return 0;
+    return Number(BigInt(amount) * BigInt(Math.round(rate * 1e6)) / 100000000n);
+  }
+
+  function calculateFees(opt) {
+    var salePrice = truncAmount(opt.salePrice);
+    var cost = truncAmount(opt.cost);
+    var shipping = truncAmount(opt.shipping);
+
+    if (salePrice <= 0) return null;
+
+    var baseFee = mulRate(salePrice, opt.baseRate);
+    var sellingFee = mulRate(salePrice, opt.sellingRate);
+    var shoppingFee = opt.shoppingConnect ? mulRate(salePrice, opt.shoppingRate) : 0;
+    var shippingFee = opt.mode === 'paid' ? mulRate(shipping, opt.baseRate) : 0;
+    var shippingCost = opt.mode === 'free' ? shipping : 0;
+
+    var totalFees = baseFee + sellingFee + shoppingFee + shippingFee;
+    var totalCost = cost + shippingCost + totalFees;
+
+    var profit = salePrice - totalCost;
+    var margin = Number(BigInt(profit) * 100n / BigInt(salePrice));
+
+    return {
+      salePrice: salePrice,
+      cost: cost,
+      shipping: shipping,
+      baseFee: baseFee,
+      sellingFee: sellingFee,
+      shoppingFee: shoppingFee,
+      shippingFee: shippingFee,
+      shippingCost: shippingCost,
+      totalFees: totalFees,
+      totalCost: totalCost,
+      profit: profit,
+      margin: margin
+    };
+  }
+
+  var mode = 'paid';
+
+  function update() {
+    var hasConnect = $('sf-connect').value === 'yes';
+    $('sf-connect-rate-wrap').hidden = !hasConnect;
+    $('sf-shipping-label').textContent = mode === 'paid' ? '고객에게 받는 배송비 (원)' : '판매자 부담 배송비 (원)';
+    $('sf-assumption').textContent = mode === 'paid' ? '유료배송: 고객 배송비에는 기본 수수료율만 적용합니다. 원본 엑셀처럼 배송비 수입과 실제 택배비의 차액은 반영하지 않습니다.' : '무료배송: 판매자가 부담하는 배송비 전액을 비용에 포함합니다.';
+
+    var isDefaultBase = Number($('sf-base-rate').value) === rates[$('sf-business').value];
+    var isDefaultSelling = Number($('sf-selling-rate').value) === marketingRates[$('sf-marketing').value];
+    var isDefaultConnect = !hasConnect || Number($('sf-connect-rate').value) === shoppingRateDefault;
+
+    $('sf-rate-note').textContent = (isDefaultBase && isDefaultSelling && isDefaultConnect) ? '기본 요율 적용 중' : '직접 수정한 요율 적용 중';
+
+    var results;
+    try {
+      if (['sf-sale', 'sf-cost', 'sf-shipping', 'sf-base-rate', 'sf-selling-rate'].some(function(p){ return $(p).value.trim() === ''; })) {
+        results = null;
+      } else {
+        results = calculateFees({
+          salePrice: Number($('sf-sale').value),
+          cost: Number($('sf-cost').value),
+          shipping: Number($('sf-shipping').value),
+          baseRate: Number($('sf-base-rate').value),
+          sellingRate: Number($('sf-selling-rate').value),
+          shoppingConnect: hasConnect,
+          shoppingRate: hasConnect ? Number($('sf-connect-rate').value) : 0,
+          mode: mode
+        });
+      }
+    } catch(e) {
+      results = null;
+    }
+
+    $('sf-error').hidden = !!results;
+    $('sf-result').hidden = !results;
+
+    if (!results) {
+      $('sf-error').textContent = '판매가는 1원 이상, 원가·배송비는 0 이상으로 입력하세요. 수수료율은 0~100%, 소수점 6자리까지 입력할 수 있습니다.';
+      return;
+    }
+
+    var fmt = function(n) { return n.toLocaleString('ko-KR') + ' 원'; };
+    $('sf-profit').textContent = fmt(results.profit);
+    $('sf-profit').parentNode.classList.toggle('is-loss', results.profit < 0);
+    $('sf-margin').textContent = '이익률 ' + results.margin + '%';
+
+    $('sf-total-fees').textContent = fmt(results.totalFees);
+    $('sf-total-cost').textContent = fmt(results.totalCost);
+    $('sf-cost-result').textContent = fmt(results.cost);
+    $('sf-base-fee').textContent = fmt(results.baseFee);
+    $('sf-selling-fee').textContent = fmt(results.sellingFee);
+    $('sf-shopping-fee').textContent = fmt(results.shoppingFee);
+    $('sf-shipping-cost').textContent = fmt(results.shippingCost);
+    $('sf-shipping-fee').textContent = fmt(results.shippingFee);
+  }
+
+  function setExample(isPaid) {
+    mode = isPaid ? 'paid' : 'free';
+    document.querySelectorAll('input[name="sf-mode"]').forEach(function(el){ el.checked = (el.value === mode); });
+    $('sf-business').value = 'micro';
+    $('sf-marketing').value = isPaid ? 'yes' : 'no';
+    $('sf-connect').value = 'yes';
+
+    $('sf-sale').value = '47800';
+    $('sf-cost').value = '40000';
+    $('sf-shipping').value = isPaid ? '3000' : '2500';
+    $('sf-base-rate').value = String(rates.micro);
+    $('sf-selling-rate').value = String(marketingRates[$('sf-marketing').value]);
+    $('sf-connect-rate').value = String(shoppingRateDefault);
+
+    update();
+  }
+
+  // Event Listeners for the modal inputs
+  $('sf-form').addEventListener('submit', function(e) { e.preventDefault(); });
+  $('sf-form').addEventListener('input', function(e) {
+    if (e.target.tagName === 'INPUT' && e.target.type !== 'radio') {
+      update();
+    }
+  });
+
+  $('sf-form').addEventListener('change', function(e) {
+    if (e.target.name === 'sf-mode') {
+      mode = e.target.value;
+    } else if (e.target.id === 'sf-business') {
+      $('sf-base-rate').value = String(rates[e.target.value]);
+    } else if (e.target.id === 'sf-marketing') {
+      $('sf-selling-rate').value = String(marketingRates[e.target.value]);
+    } else if (e.target.id === 'sf-connect') {
+      if (e.target.value === 'yes') {
+        $('sf-connect-rate').value = String(shoppingRateDefault);
+      }
+    }
+    update();
+  });
+
+  $('sf-paid-example').onclick = function() { setExample(true); };
+  $('sf-free-example').onclick = function() { setExample(false); };
+  $('sf-reset').onclick = function() {
+    setExample(true);
+    ['sf-sale', 'sf-cost', 'sf-shipping'].forEach(function(p) { $(p).value = ''; });
+    update();
+    $('sf-sale').focus();
+  };
+
+  // Wire up the modal trigger
+  var modal = $('sfModal');
+  var trigger = $('sf-chip');
+  var closeBtn = $('sfModalClose');
+
+  if (trigger) {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      setExample(true);
+      modal.classList.add('active');
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      modal.classList.remove('active');
+    });
+  }
+
+  // Close when clicking backdrop
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.classList.remove('active');
+    }
+  });
+})();
+
+</script>
+</body> 직전 주입(build.mjs)  [v2 · 2026-08-04]
    ① 방문 행동 추적: pageview(+utm) · term_click · scroll(완독 이정표) · leave(체류) ·
       quiz(OX 정오) · copy(실습 복사) · faq(펼침) · outbound(전환 클릭)  → Firestore 익명 append
       + 익명 번호표 vid(브라우저)·sid(세션) — 개인정보 아님(무작위 난수).
